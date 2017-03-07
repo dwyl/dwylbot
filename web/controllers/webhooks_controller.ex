@@ -8,6 +8,9 @@ defmodule Dwylbot.WebhooksController do
 
   def create(conn, _) do
     IO.puts "Post request to /webhooks received!"
-    json conn, %{response: :ok}
+    conn
+    |> put_status(201)
+    |> json(%{ok: true})
+
   end
 end
