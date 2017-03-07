@@ -17,10 +17,13 @@ defmodule Dwylbot.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/webhooks", WebhooksController, :index
+
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Dwylbot do
-  #   pipe_through :api
-  # end
+  scope "/webhooks", Dwylbot do
+    pipe_through :api
+    post "/create", WebhooksController, :create
+  end
+
 end
