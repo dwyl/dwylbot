@@ -11,6 +11,10 @@ defmodule Dwylbot.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Plug.Parsers,
+      parsers: [:urlencoded, :multipart, :json],
+      pass: ["*/*"],
+      json_decoder: Poison
   end
 
   scope "/", Dwylbot do
