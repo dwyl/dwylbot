@@ -36,7 +36,7 @@ defmodule Dwylbot.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_dwylbot_key",
-    signing_salt: "Guv2WEhg"
+    signing_salt: System.get_env("SIGNING_SALT")
 
   plug Dwylbot.Router
 end
