@@ -12,7 +12,7 @@ config :dwylbot,
 # Configures the endpoint
 config :dwylbot, Dwylbot.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "PnTr5Mputx4PwUYABceTzW2NMhFqZ3knI4lAM4Bif0qpI1CJX6FfNAgKM4zgUTuS",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: Dwylbot.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Dwylbot.PubSub,
            adapter: Phoenix.PubSub.PG2]
