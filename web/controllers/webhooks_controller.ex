@@ -6,15 +6,14 @@ defmodule Dwylbot.WebhooksController do
     render conn, "index.html"
   end
 
-  def create(conn, %{"payload" => payload}) do
+  def create(conn, params) do
     client = Tentacat.Client.new(%{access_token: System.get_env("GITHUB_ACCESS_TOKEN")})
-    json_payload = Poison.decode!(payload)
-    action = json_payload["action"]
-    labels = json_payload["issue"]["labels"]
-    assignees = json_payload["issue"]["assignees"]
-    owner = json_payload["repository"]["owner"]["login"]
-    repo = json_payload["repository"]["name"]
-    issue_id = json_payload["issue"]["number"]
+    action = params["action"]
+    labels = params["issue"]["labels"]
+    assignees = params["issue"]["assignees"]
+    owner = params["repository"]["owner"]["login"]
+    repo = params["repository"]["name"]
+    issue_id = params["issue"]["number"]
     invalid = action == "labeled" && contain_label?("in-progress", labels) && Enum.empty?(assignees)
     if invalid do
       IO.puts "Invalid in progress label"
