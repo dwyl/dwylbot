@@ -7,7 +7,8 @@ use Mix.Config
 
 # General application configuration
 config :dwylbot,
-  ecto_repos: [Dwylbot.Repo]
+  ecto_repos: [Dwylbot.Repo],
+  github_token: System.get_env("GITHUB_ACCESS_TOKEN")
 
 # Configures the endpoint
 config :dwylbot, Dwylbot.Endpoint,
