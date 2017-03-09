@@ -20,8 +20,8 @@ config :dwylbot, Dwylbot.Endpoint,
   debug_errors: true
 
 # Do not print debug messages in production
-config :logger, level: :info
-
+# config :logger, level: :info
+config :logger, :console, format: "[$level] $message\n"
 # Configure your database
 config :dwylbot, Dwylbot.Repo,
   adapter: Ecto.Adapters.Postgres,
