@@ -6,7 +6,8 @@ defmodule Dwylbot.WebhooksController do
     render conn, "index.html"
   end
 
-  def create(conn, params) do
+  def create(conn, payload) do
+    params = Poison.decode!(payload["payload"])
     client = Tentacat.Client.new(%{access_token: System.get_env("GITHUB_ACCESS_TOKEN")})
     action = params["action"]
     labels = params["issue"]["labels"]
