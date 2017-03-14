@@ -1,5 +1,11 @@
 {
-  "repository": {},
+  "name": "dwylbot",
+  "version": "1.0.0",
+  "description": "Automating our GitHub Workflow to improve team communication/collaboration",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dwyl/dwylbot.git"
+  },
   "license": "MIT",
   "scripts": {
     "deploy": "brunch build --production",
