@@ -82,8 +82,32 @@ and **temporarily** <br />
 so you need to start your server in the **same terminal**
 where you ran the `source` command_.
 
+#### Install Dependencies
+
+```
+mix deps.get
+npm install
+```
+
+#### Creat the Database (_if it does not already exist_)
+
+```
+mix do ecto.create
+```
+
 #### Run the Server
 
 ```
 mix phoenix.server
 ```
+You should see:
+```
+[info] Running Dwylbot.Endpoint with Cowboy using http://localhost:4000
+```
+
+#### View the Project in your Web Browser
+
+Open http://localhost:4000 in your web browser.
+
+
+### _Understanding_ The Project
