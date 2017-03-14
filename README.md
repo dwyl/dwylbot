@@ -89,6 +89,14 @@ mix deps.get
 npm install
 ```
 
+#### Confirm Everything is working
+
+Run the tests:
+
+```
+mix test
+```
+
 #### Creat the Database (_if it does not already exist_)
 
 ```
@@ -110,4 +118,16 @@ You should see:
 Open http://localhost:4000 in your web browser.
 
 
+
+That's nice, but what does it actually _do_...?
+
 ### _Understanding_ The Project
+
+Given your Phoenix knowledge, you _know_ that the _first_ place to look
+when you want to _understand_ <br />a Phoenix project is:
+[`web/router.ex`](https://github.com/dwyl/dwylbot/blob/master/web/router.ex)
+
+### Make a `cURL` Request
+
+Need an example GitHub Webhook request payload for this...
+see: https://github.com/dwyl/dwylbot/issues/6#issuecomment-286387463
