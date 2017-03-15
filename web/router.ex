@@ -16,13 +16,13 @@ defmodule Dwylbot.Router do
   scope "/", Dwylbot do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", WebhooksController, :index
     get "/webhooks", WebhooksController, :index
 
   end
 
   scope "/webhooks", Dwylbot do
-    pipe_through :api
+    pipe_through :api # http://www.phoenixframework.org/docs/routing
     post "/create", WebhooksController, :create
   end
 

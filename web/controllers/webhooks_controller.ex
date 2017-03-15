@@ -7,6 +7,7 @@ defmodule Dwylbot.WebhooksController do
   end
 
   def create(conn, params) do
+    IO.inspect params
     action = params["action"]
     labels = params["issue"]["labels"]
     assignees = params["issue"]["assignees"]

@@ -1,8 +1,11 @@
-# dwylbot = "GitHub _Workflow Automation_, Hints & Tips"
+# dwylbot
 
+![dwyl-heart-robot-logo](https://cloud.githubusercontent.com/assets/194400/23946011/a592b2a8-0970-11e7-83b2-29a336f9879d.png)
+## "_GitHub Workflow Automation, Helpful Hints & Timely Tips_"
 [![Build Status](https://travis-ci.org/dwyl/dwylbot.svg?branch=master)](https://travis-ci.org/dwyl/dwylbot)
 [![codecov](https://codecov.io/gh/dwyl/dwylbot/branch/master/graph/badge.svg)](https://codecov.io/gh/dwyl/dwylbot)
-[![Join the chat at https://gitter.im/dwyl/dwylbot](https://badges.gitter.im/dwyl/dwylbot.svg)](https://gitter.im/dwyl/dwylbot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Discuss](https://img.shields.io/badge/discuss-with%20us-brightgreen.svg?style=flat)](https://github.com/dwyl/dwylbot/issues "Discuss your ideas/suggestions with us!")
+
 
 _**Automating** our **GitHub workflow** to `.reduce` the number of **clicks**
 the **people** need to **perform** <br />
@@ -120,8 +123,9 @@ You should see:
 
 Open http://localhost:4000 in your web browser.
 
+![dwylbot welcome](https://cloud.githubusercontent.com/assets/194400/23944236/04ae41b4-096a-11e7-986d-8bb0063fd95a.png)
 
-
+Ok, so you know the Phoenix server is working.
 That's nice, but what does it actually _do_...?
 
 ### _Understanding_ The Project
@@ -134,3 +138,5 @@ when you want to _understand_ <br />a Phoenix project is:
 
 Need an example GitHub Webhook request payload for this...
 see: https://github.com/dwyl/dwylbot/issues/6#issuecomment-286387463
+
+See: https://developer.github.com/webhooks/creating/
