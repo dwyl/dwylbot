@@ -12,7 +12,8 @@ with their co-workers._
 ## _Why_?
 
 Learning a (_new_) Workflow is never _instantaneous_. <br />
-We the people who _already_ know the steps in our Workflow
+We (_the people who already know the steps in our Workflow_)
+_often_ need to _remind_ others who are new to it.
 
 ## _What_?
 
@@ -28,6 +29,7 @@ We refer to this as our "Workflow".
 The "job" of `dwylbot` is to help the humans learn & follow the Workflow.
 
 If you have not yet read the following guides:
+
 + https://github.com/dwyl/github-reference
 + https://github.com/dwyl/contributing
 
@@ -47,6 +49,8 @@ in this repo, so, please _read/learn_:
 + Travis https://github.com/dwyl/learn-travis
 + Heroku: https://github.com/dwyl/heroku
 
+> _**Note**: you don't need to be an "expert" in any of these things
+to start understanding the project, but it helps to know the basics._
 
 ### Run The Project _Locally_!
 
@@ -85,8 +89,7 @@ where you ran the `source` command_.
 #### Install Dependencies
 
 ```
-mix deps.get
-npm install
+mix deps.get && npm install
 ```
 
 #### Confirm Everything is working
@@ -100,7 +103,7 @@ mix test
 #### Creat the Database (_if it does not already exist_)
 
 ```
-mix do ecto.create
+mix ecto.create && mix ecto.migrate
 ```
 
 #### Run the Server
@@ -127,7 +130,7 @@ Given your Phoenix knowledge, you _know_ that the _first_ place to look
 when you want to _understand_ <br />a Phoenix project is:
 [`web/router.ex`](https://github.com/dwyl/dwylbot/blob/master/web/router.ex)
 
-### Make a `cURL` Request
+### Make a `cURL` Request to the `POST /webhooks/create`
 
 Need an example GitHub Webhook request payload for this...
 see: https://github.com/dwyl/dwylbot/issues/6#issuecomment-286387463
