@@ -6,20 +6,32 @@
 [![codecov](https://codecov.io/gh/dwyl/dwylbot/branch/master/graph/badge.svg)](https://codecov.io/gh/dwyl/dwylbot)
 [![Discuss](https://img.shields.io/badge/discuss-with%20us-brightgreen.svg?style=flat)](https://github.com/dwyl/dwylbot/issues "Discuss your ideas/suggestions with us!")
 
-
 _**Automating** our **GitHub workflow** to `.reduce` the number of **clicks**
 the **people** need to **perform** <br />
 to get their work `done` and **help everyone communicate better**
-with team members. <br />
-`dwylbot` **saves** us all **time**! Thanks `dwylbot`, we love you!!_
+with team members_. <br />
+
+## _Prerequisite to Understanding this Project_
+
+The purpose of this project will remain unclear
+if you have not read the following guides:
+
++ https://github.com/dwyl/github-reference
++ https://github.com/dwyl/contributing
+
+Please read them and come back!
+
 
 ## _Why_?
 
-Learning a (_new_) Workflow
-when you join a (_new_) team
-is never _instantaneous_. <br />
+dwyl's Workflow is
+a **_carefully crafted_ sequence of steps**
+designed to ensure everyone in the team
+can communicate and see the status of work.<br />
+
+Learning the Workflow is never _instantaneous_.
 We (_the people who already know the steps in our Workflow_)
-_often_ need to _remind_ others who are new to it. <br />
+_often_ need to _remind_ others who are new to it. e.g:<br />
 
 > "_You missed a step in the workflow which means
 the team is unaware of state/progress on this feature..._" <br />
@@ -29,38 +41,29 @@ in your commit messages so it is clear what each commit is for._" <br />
 when you want someone to review your work..._" <br />
 > "_Please only assign a Pull Request for review
 once all the tests have passed on CI..._" <br />
-> For a **list** of these common scenarios see: https://github.com/dwyl/dwylbot/issues/5
+> For a **list** of these common scenarios see:
+https://github.com/dwyl/dwylbot/issues/5
 
-The more _experienced_ people in the team
+At the start of a project the more _experienced_ people in the team
 end up having to do a lot of "_workflow mentoring_" <br />
-which (_to the new person_) can feel
-like we are "_enforcing an arbitrarily tedious & complex bureaucracy_" ... <br />
-
-In _reality_ dwyl's Workflow is
-a **_carefully crafted_ sequence of steps**
-designed to ensure everyone has visibility of work which saves time!<br />
+`dwylbot` ***automates*** giving "***workflow specific feedback***"
+which ***saves everyone time***! Thanks `dwylbot`, we _love you_!!
 
 
 ## _What_?
 
-We use GitHub as our "single source of truth"
-(_place to keep all our information
+We use GitHub as our
+["_single source of truth_"](https://en.wikipedia.org/wiki/Single_source_of_truth)
+(_one place to keep all our information
   so we don't lose anything important!_). <br />
-We _also_ use GitHub to ***discuss*** ideas/features/improvements/questions,
+We _also_ use GitHub to ***discuss*** questions/ideas/features/improvements,
 ***estimate*** the effort required to _implement_ an idea <br />
 (_or "fix" an existing feature that is not working as expected_)
-and then to ***track*** how much time a person spent on the task/feature.
+and then to ***track*** the ***progress*** while the work is being done and
+***record*** how much ***time*** a person spent on the task/feature.
 
 We refer to this as our "Workflow".
 The "job" of `dwylbot` is to help the humans learn & follow the Workflow.
-
-If you have not yet read the following guides:
-
-+ https://github.com/dwyl/github-reference
-+ https://github.com/dwyl/contributing
-
-The purpose of `dwylbot` will not be _clear_ to you.
-
 
 ## _How_?
 
