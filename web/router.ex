@@ -27,6 +27,7 @@ defmodule Dwylbot.Router do
     post "/create", WebhooksController, :create
   end
 
+  # borrowed directly from great work done by @jruts in https://git.io/vyS3V
   scope "/auth", Dwylbot do
     pipe_through :browser
 

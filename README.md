@@ -9,14 +9,74 @@
 
 _**Automating** our **GitHub workflow** to `.reduce` the number of **clicks**
 the **people** need to **perform** <br />
-to get their work `done` and **help people communicate better**
-with their co-workers._
+to get their work `done` and **help everyone communicate better**
+with team members. <br />
+`dwylbot` **saves** us all **time**! Thanks `dwylbot`, we love you!!_
 
 ## _Why_?
 
-Learning a (_new_) Workflow is never _instantaneous_. <br />
+Learning a (_new_) Workflow
+when you join a (_new_) team
+is never _instantaneous_. <br />
 We (_the people who already know the steps in our Workflow_)
-_often_ need to _remind_ others who are new to it.
+_often_ need to _remind_ others who are new to it. <br />
+
+> "_You missed a step in the workflow which means
+the team is unaware of state/progress on this feature..._" <br />
+> "_Please remember to refer to the GitHub issue
+in your commit messages so it is clear what each commit is for._" <br />
+> "_Please apply the `awaiting-review` label
+when you want someone to review your work..._" <br />
+> "_Please only assign a Pull Request for review
+once all the tests have passed on CI..._" <br />
+> For a **list** of these common scenarios see: https://github.com/dwyl/dwylbot/issues/5
+
+The more _experienced_ people in the team
+end up having to do a lot of "_workflow mentoring_" <br />
+which (_to the new person_) can feel
+like we are "_enforcing an arbitrarily tedious & complex beurocracy_" ... <br />
+
+In _reality_ dwyl's Workflow is
+a **_carefully crafted_ sequence of steps**
+designed to ensure everyone <br />
+on the team knows _exactly_ what is going on
+at all times without having to _ask_.
+
+With our GitHub-based Workflow,
+we _successfully_ avoid the need for "***project status update meetings***":
+![status updates](https://cloud.githubusercontent.com/assets/194400/24032230/cc734b34-0ade-11e7-9a02-33aa0c832085.png)
+
+
+Anyone who has _never_ worked in a "_really_ big" company where
+people have [_meetings about having meetings_](https://www.google.co.uk/search?q=meetings+about+meetings&tbm=isch)
+<br />
+Can feel like
+"_there are **too many steps** to **get work done**..._".<br />
+To those people we say: "_you have **Three Options**:_"
+1. Get a job at a "_Fortune 500 Company_"
+(_that has been around for 30+ years and claims to be "agile"_) <br />
+ `.then` come back chat about getting work done in teams;
+ _We will give you a shoulder to cry on! <br />
+ we promise not to say "**I told you so**"
+ when you tell us we were "**so right**"..._
+2. Get a job in a small company
+(_fewer than 10 people all co-located in the same office_)
+where no "_process_" is required because they "_just get stuff done!_"
+Stay with that company long enough to _feel_ the "_growing pains_" of
+_not_ having a clearly defined workflow. <br />
+`.then` try to _retrospectively_ apply a workflow and teach your colleagues
+how to cooperate effectively.
+3. _Trust_ those of us who _have_ ***felt the pain*** of working in (_multiple_)
+horribly complex companies and have _crafted_ a Workflow that ensures
+the highest level of team communication/productivity.
+
+
+Organizations _regularly_ approach us
+to teach dwyl's Workflow to their team(s).
+We have done many workshops to that end. <br />
+Sadly, delivering in-person training does not scale.
+So we decided to _automate_ our Workflow with `dwylbot`.
+
 
 ## _What_?
 
@@ -68,6 +128,13 @@ you've understood Elixir & Phoenix._
 ```
 git clone git@github.com:dwyl/dwylbot.git && cd dwylbot
 ```
+
+#### Create an Application on GitHub
+
+If you don't already have a GitHub application with valid
+keys you can use to run this project on your localhost,
+please follow these instructions:
+https://github.com/dwyl/hapi-auth-github/blob/master/GITHUB-APP-STEP-BY-STEP-GUIDE.md
 
 #### Define Local Environment Variables
 
@@ -143,8 +210,7 @@ when you want to _understand_ <br />a Phoenix project is:
 In this case we only have one (_interesting_) route: `/webhooks/create`
 
 
-#### Tests
-
+#### Tests!
 
 
 ### Make a `cURL` Request to the `POST /webhooks/create`
