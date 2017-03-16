@@ -130,9 +130,18 @@ That's nice, but what does it actually _do_...?
 
 ### _Understanding_ The Project
 
+#### Routing
+
 Given your Phoenix knowledge, you _know_ that the _first_ place to look
 when you want to _understand_ <br />a Phoenix project is:
 [`web/router.ex`](https://github.com/dwyl/dwylbot/blob/master/web/router.ex)
+
+In this case we only have one (_interesting_) route: `/webhooks/create`
+
+
+#### Tests
+
+
 
 ### Make a `cURL` Request to the `POST /webhooks/create`
 

@@ -21,7 +21,7 @@ defmodule Dwylbot.Mixfile do
   def application do
     [mod: {Dwylbot, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :tentacat]]
+                    :phoenix_ecto, :postgrex, :tentacat, :ueberauth, :ueberauth_github]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,7 +41,10 @@ defmodule Dwylbot.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:excoveralls, "~> 0.6", only: :test},
-     {:tentacat, "~> 0.6"}]
+     {:tentacat, "~> 0.6"},
+     {:ueberauth, "~> 0.4"},         # thanks to @jruts for showing us this
+     {:ueberauth_github, "~> 0.4.1"} # see: github.com/jruts/playwith_phoenix
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
