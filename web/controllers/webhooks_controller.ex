@@ -3,7 +3,7 @@ defmodule Dwylbot.WebhooksController do
 
   def index(conn, _) do
     IO.puts "Welcome to dwylbot"
-    render conn, "index.html"
+    render conn, "index.html", current_user: get_session(conn, :current_user)
   end
 
   def create(conn, params) do

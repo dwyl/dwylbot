@@ -1,5 +1,6 @@
 defmodule Dwylbot.Router do
   use Dwylbot.Web, :router
+  require Ueberauth
 
   pipeline :browser do
     plug :accepts, ["html"]

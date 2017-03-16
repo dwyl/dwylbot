@@ -79,8 +79,12 @@ create an `.env` file where you can define your environment variables.
 
 `dwylbot/.env`:
 ```
+export GITHUB_CLIENT_ID=FollowTheInstructionsToCreateAnAppOnGitHub
+export GITHUB_CLIENT_SECRET=*******
 export GITHUB_ACCESS_TOKEN=******
 export DATABASE_URL=****
+# SECRET_KEY_BASE is required for Auth Cookie:
+export SECRET_KEY_BASE=MustBeA64ByteStringProbablyBestToGenerateUsingCryptoOrJustUseThisWithSomeRandomDigitsOnTheEnd1234567890
 ```
 Then execute the command ```source .env``` which will create your environment variables
 
