@@ -11,13 +11,13 @@ the **people** need to **perform** <br />
 to get their work `done` and **help everyone communicate better**
 with team members_. <br />
 
-## _Prerequisite to Understanding this Project_
+## _Prerequisite to Understanding `dwylbot`_
 
-The purpose of this project will remain unclear
-if you have not read the following guides:
+The purpose of `dwylbot` will remain _unclear_
+if you have not read the following:
 
-+ https://github.com/dwyl/github-reference
-+ https://github.com/dwyl/contributing
++ [github.com/dwyl/**github-reference**](https://github.com/dwyl/github-reference)
++ [github.com/dwyl/**contributing**](https://github.com/dwyl/contributing)
 
 Please read them and come back!
 
@@ -30,8 +30,8 @@ designed to ensure everyone in the team
 can communicate and see the status of work.<br />
 
 Learning the Workflow is never _instantaneous_.
-We (_the people who already know the steps in our Workflow_)
-_often_ need to _remind_ others who are new to it. e.g:<br />
+At the start of a project the more _experienced_ people in the team
+end up having to do a bit of "_workflow mentoring_". e.g: <br />
 
 > "_You missed a step in the workflow which means
 the team is unaware of state/progress on this feature..._" <br />
@@ -44,10 +44,8 @@ once all the tests have passed on CI..._" <br />
 > For a **list** of these common scenarios see:
 https://github.com/dwyl/dwylbot/issues/5
 
-At the start of a project the more _experienced_ people in the team
-end up having to do a lot of "_workflow mentoring_" <br />
-`dwylbot` ***automates*** giving "***workflow specific feedback***"
-which ***saves everyone time***! Thanks `dwylbot`, we _love you_!!
+`dwylbot` ***automates*** giving "***workflow related feedback***"
+which ***saves everyone time***!
 
 
 ## _What_?
@@ -61,9 +59,10 @@ We _also_ use GitHub to ***discuss*** questions/ideas/features/improvements,
 (_or "fix" an existing feature that is not working as expected_)
 and then to ***track*** the ***progress*** while the work is being done and
 ***record*** how much ***time*** a person spent on the task/feature.
-
 We refer to this as our "Workflow".
-The "job" of `dwylbot` is to help the humans learn & follow the Workflow.
+
+`dwylbot` helps the humans learn & follow the Workflow
+so we ***communicate better*** and ***get more done***!
 
 ## _How_?
 
@@ -84,12 +83,14 @@ to start understanding the project, but it helps to know the basics._
 ### Run The Project _Locally_!
 
 The "_production_" version of `dwylbot` runs on Heroku,
-but we _develop_ it locally and you can easily run it on your computer.
+but we _develop_ it locally and you can _easily_ run it on your computer.
 
-> _**Note**: only try to run this on your computer once
+> _**Note**: **only** `try` to run this on your computer once
 you've understood Elixir & Phoenix._
 
-#### Clone the Repository (_to your personal computer_)
+#### Clone the Repository
+
+Clone the GitHub repo _to your personal computer_:
 
 ```
 git clone git@github.com:dwyl/dwylbot.git && cd dwylbot
