@@ -26,4 +26,12 @@ defmodule Dwylbot.Router do
     post "/create", WebhooksController, :create
   end
 
+  scope "/auth", Dwylbot do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    delete "/logout", AuthController, :delete
+  end
+
 end
