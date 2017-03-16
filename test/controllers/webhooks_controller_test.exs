@@ -1,8 +1,8 @@
 defmodule Dwylbot.WebhooksControllerTest do
   use Dwylbot.ConnCase
   @root_dir File.cwd!
-  @data_in_progress Path.join(~w(#{@root_dir} github_webhooks dwylbot-test.json))
-  @data_bug Path.join(~w(#{@root_dir} github_webhooks dwylbot-test-bug-label.json))
+  @data_in_progress Path.join(~w(#{@root_dir} test/fixtures dwylbot-test.json))
+  @data_bug Path.join(~w(#{@root_dir} test/fixtures dwylbot-test-bug-label.json))
 
   test "GET /webhooks", %{conn: conn} do
     conn = get conn, "/webhooks"
