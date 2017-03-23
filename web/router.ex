@@ -1,5 +1,6 @@
 defmodule Dwylbot.Router do
   use Dwylbot.Web, :router
+  require Ueberauth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -16,14 +17,23 @@ defmodule Dwylbot.Router do
   scope "/", Dwylbot do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", WebhooksController, :index
     get "/webhooks", WebhooksController, :index
 
   end
 
   scope "/webhooks", Dwylbot do
-    pipe_through :api
+    pipe_through :api # http://www.phoenixframework.org/docs/routing
     post "/create", WebhooksController, :create
+  end
+
+  # borrowed directly from great work done by @jruts in https://git.io/vyS3V
+  scope "/auth", Dwylbot do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    delete "/logout", AuthController, :delete
   end
 
 end

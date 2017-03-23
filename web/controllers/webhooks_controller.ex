@@ -3,10 +3,11 @@ defmodule Dwylbot.WebhooksController do
 
   def index(conn, _) do
     IO.puts "Welcome to dwylbot"
-    render conn, "index.html"
+    render conn, "index.html", current_user: get_session(conn, :current_user)
   end
 
   def create(conn, params) do
+    # IO.inspect params
     action = params["action"]
     labels = params["issue"]["labels"]
     assignees = params["issue"]["assignees"]
@@ -15,13 +16,17 @@ defmodule Dwylbot.WebhooksController do
     issue_id = params["issue"]["number"]
     sender = params["sender"]["login"]
 
-    invalid = action == "labeled" && contain_label?("in-progress", labels) && Enum.empty?(assignees)
+    invalid = action == "labeled"
+      && contain_label?("in-progress", labels) && Enum.empty?(assignees)
 
     if invalid do
-      client = Tentacat.Client.new(%{access_token: System.get_env("GITHUB_ACCESS_TOKEN")})
-      comment_body = %{"body" => "@#{sender} the `in-progress` label has been added to this issue **without an Assignee**.
-Please assign a user to this issue before applying the `in-progress` label."}
-      Tentacat.Issues.Comments.create(owner, repo, issue_id, comment_body, client)
+      client = Tentacat.Client.new(%{access_token:
+        System.get_env("GITHUB_ACCESS_TOKEN")})
+      comment_body = %{"body" => "@#{sender} the `in-progress` label has been
+      added to this issue **without an Assignee**. Please assign a user to this
+      issue before applying the `in-progress` label."}
+      Tentacat.Issues.Comments.create(owner, repo, issue_id,
+        comment_body, client)
       conn
       |> put_status(201)
       |> json(%{ok: true})

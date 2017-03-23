@@ -16,6 +16,7 @@
   "metrics": {:hex, :metrics, "1.0.1", "25f094dea2cda98213cecc3aeff09e940299d950904393b2a29d191c346a8486", [:rebar3], []},
   "mime": {:hex, :mime, "1.1.0", "01c1d6f4083d8aa5c7b8c246ade95139620ef8effb009edde934e0ec3b28090a", [:mix], []},
   "mimerl": {:hex, :mimerl, "1.0.2", "993f9b0e084083405ed8252b99460c4f0563e41729ab42d9074fd5e52439be88", [:rebar3], []},
+  "oauth2": {:hex, :oauth2, "0.9.1", "cac86d87f35ec835bfe4c791263bdb88c0d8bf1617d64f555ede4e9d913e35ef", [:mix], [{:hackney, "~> 1.7", [hex: :hackney, optional: false]}]},
   "phoenix": {:hex, :phoenix, "1.2.1", "6dc592249ab73c67575769765b66ad164ad25d83defa3492dc6ae269bd2a68ab", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}, {:phoenix_pubsub, "~> 1.0", [hex: :phoenix_pubsub, optional: false]}, {:plug, "~> 1.1", [hex: :plug, optional: false]}, {:poison, "~> 1.5 or ~> 2.0", [hex: :poison, optional: false]}]},
   "phoenix_ecto": {:hex, :phoenix_ecto, "3.2.2", "2e51c57614528b130d54019e78349f83a5b5d53b3b2ef775dbc30df7e1fecb45", [:mix], [{:ecto, "~> 2.1", [hex: :ecto, optional: false]}, {:phoenix_html, "~> 2.9", [hex: :phoenix_html, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}]},
   "phoenix_html": {:hex, :phoenix_html, "2.9.3", "1b5a2122cbf743aa242f54dced8a4f1cc778b8bd304f4b4c0043a6250c58e258", [:mix], [{:plug, "~> 1.0", [hex: :plug, optional: false]}]},
@@ -27,4 +28,6 @@
   "postgrex": {:hex, :postgrex, "0.13.2", "2b88168fc6a5456a27bfb54ccf0ba4025d274841a7a3af5e5deb1b755d95154e", [:mix], [{:connection, "~> 1.0", [hex: :connection, optional: false]}, {:db_connection, "~> 1.1", [hex: :db_connection, optional: false]}, {:decimal, "~> 1.0", [hex: :decimal, optional: false]}]},
   "ranch": {:hex, :ranch, "1.3.2", "e4965a144dc9fbe70e5c077c65e73c57165416a901bd02ea899cfd95aa890986", [:rebar3], []},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.1", "28a4d65b7f59893bc2c7de786dec1e1555bd742d336043fe644ae956c3497fbe", [:make, :rebar], []},
-  "tentacat": {:hex, :tentacat, "0.6.1", "fc2b07ddde616ca231d1d6380d38453d0ec33b18bfbdc9cae84970fe3ac0133d", [:mix], [{:exjsx, "~> 3.2", [hex: :exjsx, optional: false]}, {:httpoison, "~> 0.8", [hex: :httpoison, optional: false]}]}}
+  "tentacat": {:hex, :tentacat, "0.6.1", "fc2b07ddde616ca231d1d6380d38453d0ec33b18bfbdc9cae84970fe3ac0133d", [:mix], [{:exjsx, "~> 3.2", [hex: :exjsx, optional: false]}, {:httpoison, "~> 0.8", [hex: :httpoison, optional: false]}]},
+  "ueberauth": {:hex, :ueberauth, "0.4.0", "bc72d5e5a7bdcbfcf28a756e34630816edabc926303bdce7e171f7ac7ffa4f91", [:mix], [{:plug, "~> 1.2", [hex: :plug, optional: false]}]},
+  "ueberauth_github": {:hex, :ueberauth_github, "0.4.1", "b117f455da93771850ccf0bcf50593604a761006beb855cace43093592d265b4", [:mix], [{:oauth2, "~> 0.8", [hex: :oauth2, optional: false]}, {:ueberauth, "~> 0.4", [hex: :ueberauth, optional: false]}]}}
