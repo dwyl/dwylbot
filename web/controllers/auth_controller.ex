@@ -13,8 +13,7 @@ defmodule Dwylbot.AuthController do
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
     conn
-    |> IO.inspect
-    |> put_flash(:info, "Successfully authenticated.")
+    |> put_flash(:error, "Sorry something went wrong")
     |> redirect(to: "/")
   end
 
@@ -22,10 +21,9 @@ defmodule Dwylbot.AuthController do
     case UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
         conn
-        |> IO.inspect
-        |> put_flash(:info, "sucessfully authenticated.")
+        |> put_flash(:info, "sucessfully authenticated")
         |> put_session(:current_user, user)
-        |> redirect(to: "/")
+        |> redirect(to: repo_path(conn, :index))
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)

@@ -11,7 +11,7 @@ so everyone can communicate better and work as a team.<br />
     <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
   </div>
 <% else %>
-  <a class="btn btn-primary btn-lg" href="/auth/github">
+  <a class="btn btn-primary btn-lg" href="/login/github">
     <i class="fa fa-github"></i>
     Sign in with GitHub
   </a>

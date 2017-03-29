@@ -1,0 +1,6 @@
+<h1>List Repositories</h1>
+<ul>
+<%= for repo <- @repos do %>
+ <li> <%= repo["name"] %> </li>
+<% end %>
+</ul>

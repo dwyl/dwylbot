@@ -17,7 +17,8 @@ defmodule Dwylbot.Router do
   scope "/", Dwylbot do
     pipe_through :browser # Use the default browser stack
 
-    get "/", WebhooksController, :index
+    get "/", PageController, :index
+    get "/repo",RepoController, :index
     get "/webhooks", WebhooksController, :index
 
   end
