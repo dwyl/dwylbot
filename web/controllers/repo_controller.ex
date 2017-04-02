@@ -1,6 +1,8 @@
 defmodule Dwylbot.RepoController do
   use Dwylbot.Web, :controller
 
+  plug :authenticate_user when action in [:index]
+
   def index(conn, _) do
     user = get_session(conn, :current_user)
     client = Tentacat.Client.new(%{access_token: user.token})

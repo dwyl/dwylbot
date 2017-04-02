@@ -8,7 +8,7 @@ defmodule UserFromAuth do
   def find_or_create(%Auth{provider: :identity} = auth) do
     case validate_pass(auth.credentials) do
       :ok ->
-        {:ok, basic_info(IO.inspect auth)}
+        {:ok, basic_info(auth)}
       {:error, reason} -> {:error, reason}
     end
   end
@@ -18,7 +18,6 @@ defmodule UserFromAuth do
   end
 
   defp basic_info(auth) do
-    IO.inspect auth.credentials.token
     %{id: auth.uid, name: name_from_auth(auth), avatar: auth.info.image, token: auth.credentials.token}
   end
 

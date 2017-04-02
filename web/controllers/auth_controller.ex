@@ -21,7 +21,7 @@ defmodule Dwylbot.AuthController do
         conn
         |> put_flash(:info, "sucessfully authenticated")
         |> put_session(:current_user, user)
-        |> redirect(to: repo_path(conn, :index))
+        |> redirect(to: page_path(conn, :index))
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)

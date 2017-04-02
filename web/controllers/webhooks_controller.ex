@@ -2,7 +2,6 @@ defmodule Dwylbot.WebhooksController do
   use Dwylbot.Web, :controller
 
   def create(conn, params) do
-    # IO.inspect params
     action = params["action"]
     labels = params["issue"]["labels"]
     assignees = params["issue"]["assignees"]
