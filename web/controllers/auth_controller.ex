@@ -2,8 +2,6 @@ defmodule Dwylbot.AuthController do
   use Dwylbot.Web, :controller
   plug Ueberauth
 
-  alias Ueberauth.Strategy.Helpers
-
   def delete(conn, _params) do
     conn
     |> put_flash(:info, "You have been logged out!")

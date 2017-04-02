@@ -19,8 +19,6 @@ defmodule Dwylbot.Router do
 
     get "/", PageController, :index
     get "/repo",RepoController, :index
-    get "/webhooks", WebhooksController, :index
-
   end
 
   scope "/webhooks", Dwylbot do

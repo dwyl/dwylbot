@@ -1,11 +1,6 @@
 defmodule Dwylbot.WebhooksController do
   use Dwylbot.Web, :controller
 
-  def index(conn, _) do
-    IO.puts "Welcome to dwylbot"
-    render conn, "index.html", current_user: get_session(conn, :current_user)
-  end
-
   def create(conn, params) do
     # IO.inspect params
     action = params["action"]
