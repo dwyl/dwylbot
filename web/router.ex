@@ -16,18 +16,18 @@ defmodule Dwylbot.Router do
   end
 
   scope "/", Dwylbot do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PageController, :index
-    get "/repo",RepoController, :index
+    get "/repo", RepoController, :index
+    get "/repo/hooks", RepoController, :hooks
   end
 
   scope "/webhooks", Dwylbot do
-    pipe_through :api # http://www.phoenixframework.org/docs/routing
+    pipe_through :api
     post "/create", WebhooksController, :create
   end
 
-  # borrowed directly from great work done by @jruts in https://git.io/vyS3V
   scope "/auth", Dwylbot do
     pipe_through :browser
 
