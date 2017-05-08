@@ -7,7 +7,10 @@ defmodule Dwylbot.Auth do
   end
 
   def call(conn, _opts) do
-    user = get_session(conn, :current_user)
+    # this OR operator is used for our tests
+    # the test assign values directly to the conn instead of creating some fake sessions/cookies
+    # see Chapter 8 page 137 section Integration Tests of the Programmin Phoenix book
+    user = get_session(conn, :current_user) || conn.assigns[:current_user]
     cond do
       user ->
         assign(conn, :current_user, user)

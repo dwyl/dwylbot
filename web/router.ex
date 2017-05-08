@@ -31,8 +31,8 @@ defmodule Dwylbot.Router do
   scope "/auth", Dwylbot do
     pipe_through :browser
 
-    get "/:provider", AuthController, :request
-    get "/:provider/callback", AuthController, :callback
+    get "/github", AuthController, :request
+    get "/github/callback", AuthController, :callback
     delete "/logout", AuthController, :delete
   end
 
