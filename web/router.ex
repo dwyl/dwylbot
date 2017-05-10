@@ -8,6 +8,7 @@ defmodule Dwylbot.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Dwylbot.Auth
   end
 
   pipeline :api do
@@ -15,24 +16,23 @@ defmodule Dwylbot.Router do
   end
 
   scope "/", Dwylbot do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
-    get "/", WebhooksController, :index
-    get "/webhooks", WebhooksController, :index
-
+    get "/", PageController, :index
+    get "/repo", RepoController, :index
+    get "/repo/hooks", RepoController, :hooks
   end
 
   scope "/webhooks", Dwylbot do
-    pipe_through :api # http://www.phoenixframework.org/docs/routing
+    pipe_through :api
     post "/create", WebhooksController, :create
   end
 
-  # borrowed directly from great work done by @jruts in https://git.io/vyS3V
   scope "/auth", Dwylbot do
     pipe_through :browser
 
-    get "/:provider", AuthController, :request
-    get "/:provider/callback", AuthController, :callback
+    get "/github", AuthController, :request
+    get "/github/callback", AuthController, :callback
     delete "/logout", AuthController, :delete
   end
 

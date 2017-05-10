@@ -4,7 +4,7 @@ defmodule Dwylbot.Mixfile do
   def project do
     [app: :dwylbot,
      version: "0.0.1",
-     elixir: "~> 1.3.4",
+     elixir: "~> 1.3.1",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      test_coverage: [tool: ExCoveralls],
@@ -42,8 +42,8 @@ defmodule Dwylbot.Mixfile do
      {:cowboy, "~> 1.0"},
      {:excoveralls, "~> 0.6", only: :test},
      {:tentacat, "~> 0.6"},
-     {:ueberauth, "~> 0.4"},         # thanks to @jruts for showing us this
-     {:ueberauth_github, "~> 0.4.1"} # see: github.com/jruts/playwith_phoenix
+     {:ueberauth, "~> 0.4"},
+     {:ueberauth_github, "~> 0.4.1"}
     ]
   end
 

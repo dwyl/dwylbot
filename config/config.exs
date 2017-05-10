@@ -24,8 +24,12 @@ config :logger, :console,
 
 # Configer Ueberauth providers
 config :ueberauth, Ueberauth,
+  base_path: "/auth",
   providers: [
-    github: { Ueberauth.Strategy.Github, [] }
+    github: {
+      Ueberauth.Strategy.Github,
+      [request_path: "/auth/github", callback_path: "/auth/github/callback"]
+    }
   ]
 
 config :ueberauth, Ueberauth.Strategy.Github.OAuth,
