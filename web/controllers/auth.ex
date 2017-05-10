@@ -1,4 +1,7 @@
 defmodule Dwylbot.Auth do
+  @moduledoc """
+    Provide functions to authenticate a user
+  """
   import Plug.Conn
   import Phoenix.Controller
   alias Dwylbot.Router.Helpers
@@ -8,14 +11,14 @@ defmodule Dwylbot.Auth do
 
   def call(conn, _opts) do
     # this OR operator is used for our tests
-    # the test assign values directly to the conn instead of creating some fake sessions/cookies
-    # see Chapter 8 page 137 section Integration Tests of the Programmin Phoenix book
+    # the test assign values directly to the conn
+    # instead of creating some fake sessions/cookies
+    # see Chapter 8 page 137 the Programmin Phoenix book
     user = get_session(conn, :current_user) || conn.assigns[:current_user]
-    cond do
-      user ->
-        assign(conn, :current_user, user)
-      true ->
-        assign(conn, :current_user, nil)
+    if user do
+      assign(conn, :current_user, user)
+    else
+      assign(conn, :current_user, nil)
     end
   end
 
