@@ -14,7 +14,6 @@ defmodule Dwylbot.RepoController do
     user = get_session(conn, :current_user)
     client = Tentacat.Client.new(%{access_token: user.token})
     hooks = Tentacat.Hooks.list("dwyl", "dwylbot", client)
-    IO.inspect hooks
     render conn, "hooks.html", hooks: hooks
   end
 end
