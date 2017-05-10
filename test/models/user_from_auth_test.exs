@@ -18,8 +18,10 @@ defmodule Dwylbot.UserFromAuthTest do
   test "basic info, without name" do
     first_name = "simon"
     last_name = "lab"
+    id = "simon's id"
+    avatar = "avatar"
 
-    auth = %Auth{info: %{first_name: first_name, last_name: last_name}}
+    auth = %Auth{uid: id, info: %{name: "",  first_name: first_name, last_name: last_name, image: avatar}}
     info = UserFromAuth.basic_info auth
 
     assert info.name == "simon lab"

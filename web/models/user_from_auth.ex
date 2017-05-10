@@ -9,7 +9,7 @@ defmodule Dwylbot.UserFromAuth do
   ## Name from info
     iex> Dwylbot.UserFromAuth.name_from_info(%{name: "simon"})
     "simon"
-    iex> Dwylbot.UserFromAuth.name_from_info(%{first_name: "simon", last_name: "lab"})
+    iex> Dwylbot.UserFromAuth.name_from_info(%{name: "", first_name: "simon", last_name: "lab"})
     "simon lab"
   """
 
