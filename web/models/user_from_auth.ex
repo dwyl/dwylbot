@@ -1,7 +1,15 @@
 defmodule Dwylbot.UserFromAuth do
+  @moduledoc """
+  Provide functions to get the basic information from a Github user
+  """
 
   def basic_info(auth) do
-    %{uid: id, info: info, info: %{image: avatar}} = Map.merge(%{info: %{image: nil}}, auth)
+    %{
+      uid: id,
+      info: info,
+      info: %{image: avatar}
+    } = Map.merge(%{info: %{image: nil}}, auth)
+
     %{id: id, name: name_from_info(info), avatar: avatar}
   end
 
@@ -21,9 +29,10 @@ defmodule Dwylbot.UserFromAuth do
         name = [info.first_name, info.last_name]
         |> Enum.filter(&(&1 != nil and &1 != ""))
 
-        cond do
-          length(name) == 0 -> Map.get info, :nickname
-          true -> Enum.join(name, " ")
+        if length(name) > 0 do
+          Enum.join(name, " ")
+        else
+          Map.get info, :nickname
         end
     end
   end

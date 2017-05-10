@@ -43,7 +43,8 @@ defmodule Dwylbot.Mixfile do
      {:excoveralls, "~> 0.6", only: :test},
      {:tentacat, "~> 0.6"},
      {:ueberauth, "~> 0.4"},
-     {:ueberauth_github, "~> 0.4.1"}
+     {:ueberauth_github, "~> 0.4.1"},
+     {:credo, "~> 0.7.4"}
     ]
   end
 
