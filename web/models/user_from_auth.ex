@@ -6,11 +6,12 @@ defmodule Dwylbot.UserFromAuth do
   def basic_info(auth) do
     %{
       uid: id,
+      credentials: %{token: token},
       info: info,
       info: %{image: avatar}
     } = Map.merge(%{info: %{image: nil}}, auth)
 
-    %{id: id, name: name_from_info(info), avatar: avatar}
+    %{username: id, name: name_from_info(info), avatar: avatar, token: token}
   end
 
   @doc """
