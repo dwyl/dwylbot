@@ -14,7 +14,7 @@ defmodule Dwylbot.Auth do
     # the test assign values directly to the conn
     # instead of creating some fake sessions/cookies
     # see Chapter 8 page 137 the Programmin Phoenix book
-    user = get_session(conn, :current_user) || conn.assigns[:current_user]
+    user = get_session(conn, :user) || conn.assigns[:user]
     if user do
       assign(conn, :current_user, user)
     else
@@ -31,5 +31,12 @@ defmodule Dwylbot.Auth do
       |> redirect(to: Helpers.page_path(conn, :index))
       |> halt()
     end
+  end
+
+  def login(conn, user) do
+    conn
+    |> assign(:current_user, user)
+    |> put_session(:user, user)
+    |> configure_session(renew: true)
   end
 end

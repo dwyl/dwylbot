@@ -7,8 +7,8 @@ defmodule Dwylbot.AuthControllerTest do
     conn = get conn, "/auth/github/callback"
 
     assert html_response(conn, 302) =~ "redirected"
-    assert get_session(conn, :current_user)
-    assert get_flash(conn, :info) =~ "sucessfully authenticated"
+    assert get_session(conn, :user)
+    assert get_flash(conn, :info) =~ "Successful signup, welcome to dwylbot!"
   end
 
   test "GET /auth/github/callback - with errors", %{conn: conn} do

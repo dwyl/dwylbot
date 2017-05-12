@@ -4,7 +4,7 @@ defmodule Dwylbot.RepoController do
   plug :authenticate_user when action in [:index]
 
   def index(conn, _) do
-    user = get_session(conn, :current_user)
+    user = get_session(conn, :user)
     client = Client.new(%{access_token: user.token})
     repos = Repositories.list_mine(client, type: "owner")
     render conn, "index.html", repos: repos
