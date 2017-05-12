@@ -3,9 +3,12 @@ defmodule Dwylbot.User do
   Provide functions to represent users in Postgres with Ecto
   """
   use Dwylbot.Web, :model
+  alias Dwylbot.Stock
 
   schema "users" do
     field :username, :string
+    has_many :stocks, Stock
+    has_many :repositories, through: [:stocks, :repository]
 
     timestamps()
   end
