@@ -1,7 +1,7 @@
 defmodule Dwylbot.AuthController do
   use Dwylbot.Web, :controller
   plug Ueberauth
-  alias Dwylbot.{UserFromAuth, User, Repo}
+  alias Dwylbot.SessionController
 
   def delete(conn, _params) do
     conn
@@ -11,22 +11,8 @@ defmodule Dwylbot.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    user_auth = UserFromAuth.basic_info(auth)
-    changeset = User.changeset(%User{}, user_auth)
-
-    case Repo.insert(changeset) do
-      {:ok, user} ->
-        conn
-        |> put_flash(:info, "sucessfully signup")
-        |> put_session(:current_user, user_auth)
-        |> redirect(to: page_path(conn, :index))
-      {:error, changeset} ->
-        conn
-        |> put_flash(:info, "sucessfully signin")
-        |> put_session(:current_user, user_auth)
-        |> redirect(to: page_path(conn, :index))
-    end
-
+    user = basic_info(auth)
+    SessionController.create(conn, user)
   end
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
@@ -34,4 +20,10 @@ defmodule Dwylbot.AuthController do
     |> put_flash(:error, "Error while authenticating")
     |> redirect(to: "/")
   end
+
+  defp basic_info(auth) do
+    %{uid: username, credentials: %{token: token}} = auth
+    %{username: username, token: token}
+  end
+
 end

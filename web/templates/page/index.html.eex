@@ -7,7 +7,7 @@ so everyone can communicate better and work as a team.<br />
 <br />
 <%= if @current_user do %>
   <div class="jumbotron">
-    <h2>Welcome <%= @current_user.name %>!</h2>
+    <h2>Welcome <%= @current_user.username %>!</h2>
 
     <%= link "Add Dwylbot on your repositories", to: repo_path(@conn, :index), class: "btn btn-primary" %>
     <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
