@@ -10,14 +10,14 @@ defmodule Dwylbot.SessionController do
       {:ok, user} ->
         conn
         |> Auth.login(user)
-        |> put_flash(:info, "Sucessfully signup, welcome to dwylbot!")
+        |> put_flash(:info, "Successful signup, welcome to dwylbot!!")
         |> redirect(to: page_path(conn, :index))
       {:error, changeset} ->
         case elem(changeset.errors[:username], 0) do
           "has already been taken" ->
             conn
             |> Auth.login(user)
-            |> put_flash(:info, "Sucessfully signin")
+            |> put_flash(:info, "Successful signin, welcome back!")
             |> redirect(to: page_path(conn, :index))
           _ ->
             conn

@@ -21,9 +21,7 @@ defmodule Dwylbot.AuthController do
     |> redirect(to: "/")
   end
 
-  defp basic_info(auth) do
-    %{uid: username, credentials: %{token: token}} = auth
+  defp basic_info(%{uid: username, credentials: %{token: token}}) do
     %{username: username, token: token}
   end
-
 end
