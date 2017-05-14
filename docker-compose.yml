@@ -1,0 +1,68 @@
+# v2 sintax
+version: '2'
+
+# Named volumes
+volumes:
+  # PGSQL Data
+  dwylbot-pgsql-data:
+    driver: local
+
+services:
+  # Postgres (alpine)
+  db_dev:
+    image: postgres:alpine
+    container_name: dwylbot-pgsql-dev
+    volumes:
+      - dwylbot-pgsql-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_DB=dwylbot_dev
+      - POSTGRES_USER=dwylbot
+      - POSTGRES_PASSWORD=dwylbot
+
+  # Postgres (alpine)
+  db_test:
+    image: postgres:alpine
+    container_name: dwylbot-pgsql-test
+    volumes:
+      - dwylbot-pgsql-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432"
+    restart: always
+    environment:
+      - POSTGRES_DB=dwylbot_test
+      - POSTGRES_USER=dwylbot
+      - POSTGRES_PASSWORD=dwylbot
+
+  # APP (With Elixir)
+  app:
+    image: dwyl/elixir:latest
+    container_name: dwylbot-app
+    restart: always
+    command: mix phoenix.server
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db_dev
+    environment:
+      - MIX_ENV=dev
+#      - MIX_DEBUG=1 compile
+
+# APP Test (With Elixir)
+  app_test:
+    image: dwyl/elixir:latest
+    container_name: dwylbot-app-test
+    restart: always
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "4001:4000"
+    depends_on:
+      - db_test
+    environment:
+#     - MIX_ENV=test
+     - MIX_DEBUG=1 compile
