@@ -9,7 +9,7 @@ defmodule Dwylbot.GithubAPI.InMemory do
     ]
   end
 
-  def get_repositories(_token, id_installation) do
+  def get_repositories(_token, _id_installation) do
     [
       %{"name" => "learn-elixir"}
     ]

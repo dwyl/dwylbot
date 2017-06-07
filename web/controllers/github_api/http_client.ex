@@ -12,14 +12,18 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
   end
 
   def get_installations(token) do
-    {:ok, res} = HTTPoison.get("#{@github_root}/user/installations", header(token), [])
-    {:ok, data} = PP.parse(res.body)
-    data["installations"]
+    "#{@github_root}/user/installations"
+    |> HTTPoison.get!(header(token), [])
+    |> Map.fetch!(:body)
+    |> PP.parse!
+    |> Map.get("installations")
   end
 
   def get_repositories(token, id_installation) do
-    {:ok, res} = HTTPoison.get("#{@github_root}/user/installations/#{id_installation}/repositories", header(token), [])
-    {:ok, data} = PP.parse(res.body)
-    data["repositories"]
+    "#{@github_root}/user/installations/#{id_installation}/repositories"
+    |> HTTPoison.get!(header(token), [])
+    |> Map.fetch!(:body)
+    |> PP.parse!
+    |> Map.get("repositories")
   end
 end
