@@ -19,7 +19,7 @@ defmodule Dwylbot.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/installation", InstallationController, :index
+    resources "/installation", InstallationController, only: [:index, :show]
   end
 
   scope "/auth", Dwylbot do
