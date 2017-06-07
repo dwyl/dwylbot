@@ -25,4 +25,17 @@ defmodule Dwylbot.InstallationControllerTest do
     assert response =~ "FocusHub"
   end
 
+  test "GET /installation/1 - redirect to home page not logged in", %{conn: conn} do
+    conn = get conn, "/installation/1"
+    assert html_response(conn, 302) =~ "redirect"
+  end
+
+  @tag login_as: "Simon"
+  test "GET /installation/1 - list repos for instllations 1 where dwylbot is active", %{conn: conn} do
+    conn = get conn, "/installation/1"
+    response = assert html_response(conn, 200)
+    assert response =~ "List of repositories with dwylbot active"
+    assert response =~ "learn-elixir"
+  end
+
 end

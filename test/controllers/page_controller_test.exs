@@ -2,7 +2,7 @@ defmodule Dwylbot.PageControllerTest do
   use Dwylbot.ConnCase
   setup %{conn: conn} = config do
     if name = config[:login_as] do
-      user = %{username: name}
+      user = %{username: name, token: "1"}
       conn = assign(conn, :user, user)
       {:ok, conn: conn, user: user}
     else
