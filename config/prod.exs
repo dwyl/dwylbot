@@ -29,6 +29,8 @@ config :dwylbot, Dwylbot.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
+config :dwylbot, :github_api, Dwylbot.GithubAPI.HTTPClient
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

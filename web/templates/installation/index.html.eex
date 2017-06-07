@@ -1,2 +1,7 @@
 <h1>List of dwylbot installations</h1>
-<p>coming soon!</p>
+<ul>
+  <%= for installation <- @installations do %>
+    <li> <%= installation["account"]["login"] %> </li>
+  <% end %>
+</ul>
+<%= link "Manage Installations", to: "https://github.com/apps/dwylbot", class: "btn btn-primary" %>

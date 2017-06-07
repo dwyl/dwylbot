@@ -17,3 +17,5 @@ config :dwylbot, Dwylbot.Repo,
   database: "dwylbot_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :dwylbot, :github_api, Dwylbot.GithubAPI.InMemory
