@@ -11,9 +11,10 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
   end
 
   def get_installations(token) do
-    # create post request with header to get the list of installation of a user.
-    {:ok, res} = HTTPoison.get("https://api.github.com/user/installations", header(token), [])
-    {:ok, data} = PP.parse(res.body)
-    data["installations"]
+    "https://api.github.com/user/installations"
+    |> HTTPoison.get!(header(token), [])
+    |> Map.fetch!(:body)
+    |> PP.parse!
+    |> Map.get("installations")
   end
 end
