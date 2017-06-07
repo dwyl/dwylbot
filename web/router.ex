@@ -19,13 +19,7 @@ defmodule Dwylbot.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/repo", RepoController, :index
-    get "/repo/hooks", RepoController, :hooks
-  end
-
-  scope "/webhooks", Dwylbot do
-    pipe_through :api
-    post "/create", WebhooksController, :create
+    get "/installation", InstallationController, :index
   end
 
   scope "/auth", Dwylbot do

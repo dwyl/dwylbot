@@ -4,7 +4,7 @@ defmodule Dwylbot.Mixfile do
   def project do
     [app: :dwylbot,
      version: "0.0.1",
-     elixir: "~> 1.3.1",
+     elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      test_coverage: [tool: ExCoveralls],

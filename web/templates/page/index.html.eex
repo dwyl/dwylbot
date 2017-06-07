@@ -9,7 +9,7 @@ so everyone can communicate better and work as a team.<br />
   <div class="jumbotron">
     <h2>Welcome <%= @current_user.username %>!</h2>
 
-    <%= link "Add Dwylbot on your repositories", to: repo_path(@conn, :index), class: "btn btn-primary" %>
+    <%= link "See your dwylbot installations", to: installation_path(@conn, :index), class: "btn btn-primary" %>
     <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
   </div>
 <% else %>
