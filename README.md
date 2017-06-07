@@ -96,12 +96,11 @@ Clone the GitHub repo _to your personal computer_:
 git clone git@github.com:dwyl/dwylbot.git && cd dwylbot
 ```
 
-#### Create an Application on GitHub
+#### Create a GitHub Application
 
 If you don't already have a GitHub application with valid
 keys you can use to run this project on your localhost,
-please follow these instructions:
-https://github.com/dwyl/hapi-auth-github/blob/master/GITHUB-APP-STEP-BY-STEP-GUIDE.md
+please follow these instructions: https://developer.github.com/apps
 
 #### Define Local Environment Variables
 
@@ -115,7 +114,6 @@ create an `.env` file where you can define your environment variables.
 ```
 export GITHUB_CLIENT_ID=FollowTheInstructionsToCreateAnAppOnGitHub
 export GITHUB_CLIENT_SECRET=*******
-export GITHUB_ACCESS_TOKEN=******
 export DATABASE_URL=****
 # SECRET_KEY_BASE is required for Auth Cookie:
 export SECRET_KEY_BASE=MustBeA64ByteStringProbablyBestToGenerateUsingCryptoOrJustUseThisWithSomeRandomDigitsOnTheEnd1234567890
