@@ -9,6 +9,7 @@
     "test/support/channel_case.ex",
     "test/support/conn_case.ex",
     "web/web.ex",
-    "web/views/error_helpers.ex"
+    "web/views/error_helpers.ex",
+    "web/controllers/github_api/http_client.ex"
   ]
 }

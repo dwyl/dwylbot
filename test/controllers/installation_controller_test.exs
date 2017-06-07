@@ -3,7 +3,7 @@ defmodule Dwylbot.InstallationControllerTest do
 
   setup %{conn: conn} = config do
     if name = config[:login_as] do
-      user = %{username: name}
+      user = %{username: name, token: "1"}
       conn = assign(conn, :user, user)
       {:ok, conn: conn, user: user}
     else
@@ -19,7 +19,10 @@ defmodule Dwylbot.InstallationControllerTest do
   @tag login_as: "Simon"
   test "GET /installation - list dwylbot installation", %{conn: conn} do
     conn = get conn, "/installation"
-    assert html_response(conn, 200) =~ "List of dwylbot installations"
+    response = assert html_response(conn, 200)
+    assert response =~ "List of dwylbot installations"
+    assert response =~ "dwyl"
+    assert response =~ "FocusHub"
   end
 
 end

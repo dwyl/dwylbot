@@ -21,7 +21,7 @@ defmodule Dwylbot.Mixfile do
   def application do
     [mod: {Dwylbot, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :tentacat, :ueberauth, :ueberauth_github]]
+                    :phoenix_ecto, :postgrex, :ueberauth, :ueberauth_github, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,10 +41,10 @@ defmodule Dwylbot.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:excoveralls, "~> 0.6", only: :test},
-     {:tentacat, "~> 0.6"},
      {:ueberauth, "~> 0.4"},
      {:ueberauth_github, "~> 0.4.1"},
-     {:credo, "~> 0.7.4"}
+     {:credo, "~> 0.7.4"},
+     {:httpoison, "~> 0.11.2"}
     ]
   end
 
