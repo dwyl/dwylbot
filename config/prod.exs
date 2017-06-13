@@ -30,6 +30,8 @@ config :dwylbot, Dwylbot.Repo,
   ssl: true
 
 config :dwylbot, :github_api, Dwylbot.GithubAPI.HTTPClient
+# 30 s
+config :dwylbot, :duration, 30000
 
 # ## SSL Support
 #

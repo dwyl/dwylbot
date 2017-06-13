@@ -37,7 +37,7 @@ config :ueberauth, Ueberauth.Strategy.Github.OAuth,
   client_secret: System.get_env("GITHUB_CLIENT_SECRET")
 
 # define name of the github application
-config :dwylbot, :github_app_name, "simonlabapp"
+config :dwylbot, :github_app_name, System.get_env("GITHUB_APP_NAME")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
