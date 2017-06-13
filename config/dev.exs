@@ -43,3 +43,4 @@ config :dwylbot, Dwylbot.Repo,
   pool_size: 10
 
 config :dwylbot, :github_api, Dwylbot.GithubAPI.HTTPClient
+config :dwylbot, :duration, 1000

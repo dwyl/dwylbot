@@ -30,4 +30,9 @@ defmodule Dwylbot.Router do
     delete "/logout", AuthController, :delete
   end
 
+  scope "/event", Dwylbot do
+    pipe_through :api
+    post "/new", EventController, :new
+  end
+
 end

@@ -7,4 +7,4 @@
     </li>
   <% end %>
 </ul>
-<%= link "Manage Installations", to: "https://github.com/apps/dwylbot", class: "btn btn-primary" %>
+<%= link "Manage Installations", to: "https://github.com/apps/#{@app_name}", class: "btn btn-primary" %>

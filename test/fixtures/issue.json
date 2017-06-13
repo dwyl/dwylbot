@@ -1,0 +1,51 @@
+{
+  "url": "https://api.github.com/repos/SimonLab/github_app/issues/3",
+  "repository_url": "https://api.github.com/repos/SimonLab/github_app",
+  "labels_url": "https://api.github.com/repos/SimonLab/github_app/issues/3/labels{/name}",
+  "comments_url": "https://api.github.com/repos/SimonLab/github_app/issues/3/comments",
+  "events_url": "https://api.github.com/repos/SimonLab/github_app/issues/3/events",
+  "html_url": "https://github.com/SimonLab/github_app/issues/3",
+  "id": 235532030,
+  "number": 3,
+  "title": "Test issue",
+  "user": {
+    "login": "SimonLab",
+    "id": 6057298,
+    "avatar_url": "https://avatars1.githubusercontent.com/u/6057298?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/SimonLab",
+    "html_url": "https://github.com/SimonLab",
+    "followers_url": "https://api.github.com/users/SimonLab/followers",
+    "following_url": "https://api.github.com/users/SimonLab/following{/other_user}",
+    "gists_url": "https://api.github.com/users/SimonLab/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/SimonLab/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/SimonLab/subscriptions",
+    "organizations_url": "https://api.github.com/users/SimonLab/orgs",
+    "repos_url": "https://api.github.com/users/SimonLab/repos",
+    "events_url": "https://api.github.com/users/SimonLab/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/SimonLab/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+    {
+      "id": 624855442,
+      "url": "https://api.github.com/repos/SimonLab/github_app/labels/in-progress",
+      "name": "in-progress",
+      "color": "009688",
+      "default": false
+    }
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2017-06-13T12:09:09Z",
+  "updated_at": "2017-06-13T13:25:48Z",
+  "closed_at": null,
+  "body": "This is a test issue for dwylbot"
+}
