@@ -1,7 +1,10 @@
 defmodule Dwylbot.WaitProcess do
+  @moduledoc """
+  The delay function is used to create new checking rules processes
+  """
   alias Dwylbot.Rules, as: DR
   @github_api Application.get_env(:dwylbot, :github_api)
-  @duration 2000
+  @duration Application.get_env(:dwylbot, :duration)
 
   def delay(params) do
     if params["sender"]["type"] != "Bot" do
