@@ -3,7 +3,6 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
   wrapper functions for the API Github App API
   """
   alias Poison.Parser, as: PP
-  alias Dwylbot.Rules, as: R
   alias JOSE.JWK, as: JJ
   import Joken
 
@@ -64,7 +63,7 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
   def report_error(token, errors, comments_url) do
     if !Enum.empty?(errors) do
       message = errors
-      |> Enum.map(&(R.generate_message_error &1))
+      |> Enum.map(fn(e) -> e.error_message end)
       |> Enum.join("/n")
 
       comment = Poison.encode!(%{body: message})
