@@ -8,7 +8,6 @@ defmodule Dwylbot.WaitProcess do
 
   def delay(payload) do
     errors = Rules.apply_and_check_errors(payload)
-
     unless Enum.empty?(errors) do
       Process.sleep(@duration)
       token = @github_api.get_installation_token(payload["installation"]["id"])

@@ -64,7 +64,11 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     if !Enum.empty?(errors) do
       message = errors
       |> Enum.map(fn(e) -> e.error_message end)
-      |> Enum.join("/n")
+      |> Enum.join(
+        """
+
+        """
+      )
 
       comment = Poison.encode!(%{body: message})
       comments_url
