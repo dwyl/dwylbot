@@ -6,6 +6,7 @@ defmodule Dwylbot.Rules.List do
   def get_rules do
     [
       Dwylbot.Rules.Inprogress,
+      Dwylbot.Rules.Noassignees
     ]
   end
 end
