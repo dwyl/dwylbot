@@ -23,8 +23,8 @@ defmodule Dwylbot.Rules.Noassignees do
 
   defp error_message(login) do
     """
-    @#{login} the issue doesn't have anymore assignees but is still `in-progress`.
-    Please assign a user to this issue or remove the `in-progress` label.
+    :warning: @#{login} issue has no **assignee** but is still `in-progress`. Who is working on it?
+    Please assign a user to this issue or remove the `in-progress` label. Thanks! :heart:
     """
   end
 end
