@@ -7,17 +7,10 @@ defmodule Dwylbot.Rules.TimeEstimation do
   end
 
   def check(payload) do
-    time = [
-      "T1d",
-      "T1h",
-      "T2h",
-      "T4h",
-      "T25mn"
-    ]
     labels = payload["issue"]["labels"]
     in_progress = Enum.any?(labels, fn(l) -> l["name"] == "in-progress" end)
-    estimation = time
-    |> Enum.map(fn(t) -> Enum.any?(labels, fn(l) -> l["name"] == t end) end)
+    estimation = labels
+    |> Enum.map(fn(l) -> Regex.match?(~r/T\d{1,3}[mhd]/, l["name"]) end)
     |> Enum.reduce(fn(x, acc) -> x || acc end)
     if in_progress && !estimation do
       %{
