@@ -12,11 +12,10 @@ defmodule Dwylbot.WaitProcess do
       Process.sleep(@duration)
       token = @github_api.get_installation_token(payload["installation"]["id"])
       issue_url = payload["issue"]["url"]
-      comments_url = payload["issue"]["comments_url"]
       issue = @github_api.get_issue(token, issue_url)
       check_errors = Rules.check_errors(%{"issue" => issue})
       errors_to_report = Rules.compare(check_errors, errors)
-      @github_api.report_error(token, errors_to_report, comments_url)
+      @github_api.report_error(token, errors_to_report)
     end
   end
 end
