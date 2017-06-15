@@ -27,7 +27,7 @@ defmodule Dwylbot.GithubAPI.InMemory do
     |> PP.parse!()
   end
 
-  def report_error(_token, _errors, _comments_url) do
+  def report_error(_token, _errors) do
     %{ok: 200}
   end
 end

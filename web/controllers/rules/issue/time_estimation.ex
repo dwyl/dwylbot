@@ -15,7 +15,12 @@ defmodule Dwylbot.Rules.TimeEstimation do
     if in_progress && !estimation do
       %{
         error_type: "noestimation",
-        error_message: payload["sender"] && error_message(payload["sender"]["login"])
+        actions: [
+          %{
+            comment: payload["sender"] && error_message(payload["sender"]["login"]),
+            url: payload["issue"]["comments_url"]
+          }
+        ]
       }
     else
       nil

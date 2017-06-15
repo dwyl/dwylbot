@@ -60,19 +60,18 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     |> PP.parse!
   end
 
-  def report_error(token, errors, comments_url) do
-    if !Enum.empty?(errors) do
-      message = errors
-      |> Enum.map(fn(e) -> e.error_message end)
-      |> Enum.join(
-        """
+  def report_error(token, errors) do
+    errors
+    |> Enum.map(fn(error) -> error.actions end)
+    |> Enum.concat()
+    |> Enum.each(fn(action) -> post_action(action, token) end)
+  end
 
-        """
-      )
-
-      comment = Poison.encode!(%{body: message})
-      comments_url
-      |> HTTPoison.post!(comment, header(token))
+  defp post_action(action, token) do
+    case action do
+      %{comment: comment, url: url} ->
+        url
+        |> HTTPoison.post!(Poison.encode!(%{body: comment}), header(token))
     end
   end
 
