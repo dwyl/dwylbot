@@ -12,6 +12,10 @@ defmodule Dwylbot.Rules do
     |> Enum.filter(fn(e) -> e != nil end)
   end
 
+  @doc """
+  load list of modules representing our rules
+  and apply the rules to the payload to detect any errors
+  """
   def check_errors(payload) do
     rules = RulesList.get_rules()
     rules
