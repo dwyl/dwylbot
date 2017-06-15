@@ -11,7 +11,7 @@ defmodule Dwylbot.Rules.TimeEstimation do
     in_progress = Enum.any?(labels, fn(l) -> l["name"] == "in-progress" end)
     estimation = labels
     |> Enum.map(fn(l) -> Regex.match?(~r/T\d{1,3}[mhd]/, l["name"]) end)
-    |> Enum.reduce(fn(x, acc) -> x || acc end)
+    |> Enum.reduce(false, fn(x, acc) -> x || acc end)
     if in_progress && !estimation do
       %{
         error_type: "noestimation",
