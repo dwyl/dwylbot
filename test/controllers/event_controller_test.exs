@@ -17,4 +17,21 @@ defmodule Dwylbot.EventTestController do
     conn = post conn, "/event/new", payload
     assert json_response(conn, 200)
   end
+
+  test "POST /event/new - new issue without description", %{conn: conn} do
+    payload = "./test/fixtures/no_description.json"
+    |> File.read!()
+    |> PP.parse!()
+    conn = post conn, "/event/new", payload
+    assert json_response(conn, 200)
+  end
+
+  test "POST /event/new - unassigned with inprogress", %{conn: conn} do
+    payload = "./test/fixtures/unassigned_inprogress.json"
+    |> File.read!()
+    |> PP.parse!()
+    conn = post conn, "/event/new", payload
+    assert json_response(conn, 200)
+  end
+
 end
