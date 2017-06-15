@@ -7,7 +7,7 @@ defmodule Dwylbot.SessionController do
     user_changeset = User.changeset(%User{}, user)
 
     case Repo.insert(user_changeset) do
-      {:ok, user} ->
+      {:ok, _user_inserted} ->
         conn
         |> Auth.login(user)
         |> put_flash(:info, "Successful signup, welcome to dwylbot!!")
