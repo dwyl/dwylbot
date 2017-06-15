@@ -1,9 +1,9 @@
 defmodule Dwylbot.EventController do
   use Dwylbot.Web, :controller
-  alias Dwylbot.WaitProcess, as: DW
+  alias Dwylbot.WaitProcess, as: WAIT
 
   def new(conn, params) do
-    spawn(DW, :delay, [params])
+    spawn(WAIT, :delay, [params])
     conn
     |> put_status(200)
     |> json(%{ok: "event received"})
