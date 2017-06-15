@@ -11,7 +11,12 @@ defmodule Dwylbot.Rules.NoDescription do
     if String.length(description) == 0 do
       %{
         error_type: "no_description",
-        error_message: payload["sender"] && error_message(payload["sender"]["login"])
+        actions: [
+          %{
+            comment: payload["sender"] && error_message(payload["sender"]["login"]),
+            url: payload["issue"]["comments_url"]
+          }
+        ]
       }
     else
       nil
