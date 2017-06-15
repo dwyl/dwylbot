@@ -1,4 +1,4 @@
-defmodule Dwylbot.Rules.NoDescription do
+defmodule Dwylbot.Rules.Issue.NoDescription do
   @moduledoc """
   Check for error when an issue is created without a description
   """
@@ -10,7 +10,7 @@ defmodule Dwylbot.Rules.NoDescription do
     description = String.trim payload["issue"]["body"]
     if String.length(description) == 0 do
       %{
-        error_type: "no_description",
+        error_type: "issue_no_description",
         actions: [
           %{
             comment: payload["sender"] && error_message(payload["sender"]["login"]),

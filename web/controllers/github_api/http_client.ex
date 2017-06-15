@@ -53,13 +53,6 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     |> Map.get("token")
   end
 
-  def get_issue(token, url) do
-    url
-    |> HTTPoison.get!(header(token), [])
-    |> Map.fetch!(:body)
-    |> PP.parse!
-  end
-
   def report_error(token, errors) do
     errors
     |> Enum.map(fn(error) -> error.actions end)
@@ -73,6 +66,22 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
         url
         |> HTTPoison.post!(Poison.encode!(%{body: comment}), header(token))
     end
+  end
+
+  def get_data(token, payload, "issue") do
+    issue = payload["issue"]["url"]
+    |> HTTPoison.get!(header(token), [])
+    |> Map.fetch!(:body)
+    |> PP.parse!
+    %{"issue" => issue}
+  end
+
+  def get_data(token, payload, "pull_request") do
+    pr = payload["pull_request"]["url"]
+    |> HTTPoison.get!(header(token), [])
+    |> Map.fetch!(:body)
+    |> PP.parse!
+    %{"pull_request" => pr}
   end
 
 end
