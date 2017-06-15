@@ -7,7 +7,8 @@ defmodule Dwylbot.Rules.List do
     [
       Dwylbot.Rules.Inprogress,
       Dwylbot.Rules.Noassignees,
-      Dwylbot.Rules.TimeEstimation
+      Dwylbot.Rules.TimeEstimation,
+      Dwylbot.Rules.NoDescription
     ]
   end
 end
