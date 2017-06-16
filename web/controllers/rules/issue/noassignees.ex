@@ -1,4 +1,4 @@
-defmodule Dwylbot.Rules.Noassignees do
+defmodule Dwylbot.Rules.Issue.Noassignees do
   @moduledoc """
   Check errors when an assignee is removed but the in-progress label
   is still on the issue (list of assignees should be empty too)
@@ -13,7 +13,7 @@ defmodule Dwylbot.Rules.Noassignees do
     in_progress = Enum.any?(labels, fn(l) -> l["name"] == "in-progress" end)
     if in_progress && Enum.empty?(assignees) do
       %{
-        error_type: "inprogress_noassignees",
+        error_type: "issue_inprogress_noassignees",
         actions: [
           %{
             comment: payload["sender"] && error_message(payload["sender"]["login"]),

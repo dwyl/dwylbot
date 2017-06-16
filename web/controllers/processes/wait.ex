@@ -6,14 +6,13 @@ defmodule Dwylbot.WaitProcess do
   @github_api Application.get_env(:dwylbot, :github_api)
   @duration Application.get_env(:dwylbot, :duration)
 
-  def delay(payload) do
-    errors = Rules.apply_and_check_errors(payload)
+  def delay(payload, event_type) do
+    errors = Rules.apply_and_check_errors(payload, event_type)
     unless Enum.empty?(errors) do
       Process.sleep(@duration)
       token = @github_api.get_installation_token(payload["installation"]["id"])
-      issue_url = payload["issue"]["url"]
-      issue = @github_api.get_issue(token, issue_url)
-      check_errors = Rules.check_errors(%{"issue" => issue})
+      data = @github_api.get_data(token, payload, event_type)
+      check_errors = Rules.check_errors(data, event_type)
       errors_to_report = Rules.compare(check_errors, errors)
       @github_api.report_error(token, errors_to_report)
     end

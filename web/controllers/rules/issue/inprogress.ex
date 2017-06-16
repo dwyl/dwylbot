@@ -1,4 +1,4 @@
-defmodule Dwylbot.Rules.Inprogress do
+defmodule Dwylbot.Rules.Issue.Inprogress do
   @moduledoc """
   Check errors for "in-progress and no assignees" errors
   """
@@ -12,7 +12,7 @@ defmodule Dwylbot.Rules.Inprogress do
     in_progress = Enum.any?(labels, fn(l) -> l["name"] == "in-progress" end)
     if in_progress && Enum.empty?(assignees) do
       %{
-        error_type: "inprogress_noassignees",
+        error_type: "issue_inprogress_noassignees",
         actions: [
           %{
             comment: payload["sender"] && error_message(payload["sender"]["login"]),

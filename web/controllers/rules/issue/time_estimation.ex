@@ -1,4 +1,4 @@
-defmodule Dwylbot.Rules.TimeEstimation do
+defmodule Dwylbot.Rules.Issue.TimeEstimation do
   @moduledoc """
   Check errors for "in-progress and not time estimation" errors
   """
@@ -14,7 +14,7 @@ defmodule Dwylbot.Rules.TimeEstimation do
     |> Enum.reduce(false, fn(x, acc) -> x || acc end)
     if in_progress && !estimation do
       %{
-        error_type: "noestimation",
+        error_type: "issue_noestimation",
         actions: [
           %{
             comment: payload["sender"] && error_message(payload["sender"]["login"]),
