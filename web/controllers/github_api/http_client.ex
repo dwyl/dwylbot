@@ -68,7 +68,7 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     end
   end
 
-  def get_data(token, payload, "issue") do
+  def get_data(token, payload, "issues") do
     issue = payload["issue"]["url"]
     |> HTTPoison.get!(header(token), [])
     |> Map.fetch!(:body)
