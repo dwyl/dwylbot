@@ -19,4 +19,3 @@ config :dwylbot, Dwylbot.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :dwylbot, :github_api, Dwylbot.GithubAPI.InMemory
-config :dwylbot, :duration, 1

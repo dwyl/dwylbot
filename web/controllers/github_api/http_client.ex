@@ -54,9 +54,7 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
   end
 
   def report_error(token, errors) do
-    errors
-    |> Enum.map(fn(error) -> error.actions end)
-    |> Enum.concat()
+    errors.actions
     |> Enum.each(fn(action) -> post_action(action, token) end)
   end
 

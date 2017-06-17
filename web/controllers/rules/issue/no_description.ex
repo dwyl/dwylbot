@@ -2,6 +2,8 @@ defmodule Dwylbot.Rules.Issue.NoDescription do
   @moduledoc """
   Check for error when an issue is created without a description
   """
+  alias Dwylbot.Rules.Helpers
+
   def apply?(payload) do
     payload["action"] == "opened"
   end
@@ -16,7 +18,8 @@ defmodule Dwylbot.Rules.Issue.NoDescription do
             comment: payload["sender"] && error_message(payload["sender"]["login"]),
             url: payload["issue"]["comments_url"]
           }
-        ]
+        ],
+        wait: Helpers.wait(30_000, 1000, 1)
       }
     else
       nil
