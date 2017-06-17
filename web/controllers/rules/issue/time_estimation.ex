@@ -23,7 +23,7 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
             url: payload["issue"]["comments_url"]
           }
         ],
-        wait: Helpers.wait(30_000, 1000, 1)
+        wait: Helpers.wait(Mix.env, 30_000, 1000, 1)
       }
     else
       nil
