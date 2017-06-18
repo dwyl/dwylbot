@@ -23,11 +23,8 @@ defmodule Dwylbot.Rules do
     |> Enum.filter(fn(e) -> e != nil end)
   end
 
-  def compare(list_errors, event_errors) do
-    Enum.filter event_errors, fn(e) -> has_error?(list_errors, e) end
+  def any_error?(list_errors, error) do
+    Enum.any?(list_errors, fn(e) -> e.error_type == error.error_type end)
   end
 
-  defp has_error?(list_errors, err) do
-    Enum.any?(list_errors, fn(e) -> e.error_type == err.error_type end)
-  end
 end

@@ -2,6 +2,8 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
   @moduledoc """
   Check errors for "in-progress and not time estimation" errors
   """
+  alias Dwylbot.Rules.Helpers
+
   def apply?(payload) do
     payload["action"] == "labeled" && payload["label"]["name"] == "in-progress"
   end
@@ -20,7 +22,8 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
             comment: payload["sender"] && error_message(payload["sender"]["login"]),
             url: payload["issue"]["comments_url"]
           }
-        ]
+        ],
+        wait: Helpers.wait(Mix.env, 30_000, 1000, 1)
       }
     else
       nil

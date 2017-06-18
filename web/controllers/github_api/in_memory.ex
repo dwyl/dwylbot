@@ -35,7 +35,7 @@ defmodule Dwylbot.GithubAPI.InMemory do
     %{"pull_request" => pr}
   end
 
-  def report_error(_token, _errors) do
+  def report_error(_token, _error) do
     %{ok: 200}
   end
 end

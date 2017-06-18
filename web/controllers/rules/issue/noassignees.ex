@@ -3,6 +3,8 @@ defmodule Dwylbot.Rules.Issue.Noassignees do
   Check errors when an assignee is removed but the in-progress label
   is still on the issue (list of assignees should be empty too)
   """
+  alias Dwylbot.Rules.Helpers
+
   def apply?(payload) do
     payload["action"] == "unassigned"
   end
@@ -19,7 +21,8 @@ defmodule Dwylbot.Rules.Issue.Noassignees do
             comment: payload["sender"] && error_message(payload["sender"]["login"]),
             url: payload["issue"]["comments_url"]
           }
-        ]
+        ],
+        wait: Helpers.wait(Mix.env, 30_000, 1000, 1)
       }
     else
       nil
