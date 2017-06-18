@@ -4,11 +4,11 @@ defmodule Dwylbot.Rules.Helpers do
   wait: define the time for our rules to wait depeding on the environment
   """
   @doc """
-    iex>waith(:prod, 1, 2, 3)
+    iex>Dwylbot.Rules.Helpers.wait(:prod, 1, 2, 3)
     1
-    iex>waith(:dev, 1, 2, 3)
+    iex>Dwylbot.Rules.Helpers.wait(:dev, 1, 2, 3)
     2
-    iex>waith(:test, 1, 2, 3)
+    iex>Dwylbot.Rules.Helpers.wait(:test, 1, 2, 3)
     3
   """
   def wait(env, prod, dev, test) do

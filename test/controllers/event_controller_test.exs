@@ -2,7 +2,7 @@ defmodule Dwylbot.EventTestController do
   use Dwylbot.ConnCase
   alias Poison.Parser, as: PP
   alias Plug.Conn
-  alias Dwylbot.Rules.Helpers
+  doctest Dwylbot.Rules.Helpers
 
   @fixtures [
     %{payload: "add_label", event: "issues" },
@@ -21,11 +21,5 @@ defmodule Dwylbot.EventTestController do
       |> post("/event/new", payload)
       assert json_response(conn, 200)
     end
-  end
-
-  test "helper wait", _conn do
-      assert Helpers.wait(:prod, 1, 2, 3) == 1
-      assert Helpers.wait(:dev, 1, 2, 3) == 2
-      assert Helpers.wait(:test, 1, 2, 3) == 3
   end
 end
