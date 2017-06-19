@@ -69,18 +69,18 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
         message = comment <> feedback
         url
         |> HTTPoison.post!(Poison.encode!(%{body: message}), header(token))
+
       %{add_assignees: assignees, url: url} ->
         url
         |> HTTPoison.post!(
-            Poison.encode!(%{assignees: assignees}),
-            header(token)
-          )
+          Poison.encode!(%{assignees: assignees}), header(token)
+        )
+
       %{remove_assignees: assignees, url: url} ->
         HTTPoison.request!(
-          :delete,
-          url,
-          Poison.encode!(%{assignees: assignees}),
-          header(token))
+          :delete, url, Poison.encode!(%{assignees: assignees}), header(token)
+        )
+
       %{replace_labels: labels, url: url} ->
         url
         |> HTTPoison.put!(Poison.encode!(labels), header(token))
