@@ -4,11 +4,11 @@ defmodule Dwylbot.Rules.Helpers do
   wait: define the time for our rules to wait depeding on the environment
   """
   @doc """
-    iex>Dwylbot.Rules.Helpers.wait(:prod, 1, 2, 3)
+    iex>wait(:prod, 1, 2, 3)
     1
-    iex>Dwylbot.Rules.Helpers.wait(:dev, 1, 2, 3)
+    iex>wait(:dev, 1, 2, 3)
     2
-    iex>Dwylbot.Rules.Helpers.wait(:test, 1, 2, 3)
+    iex>wait(:test, 1, 2, 3)
     3
   """
   def wait(env, prod, dev, test) do
@@ -20,14 +20,14 @@ defmodule Dwylbot.Rules.Helpers do
   end
 
   @doc """
-  iex> Dwylbot.Rules.Helpers.label_member?([%{"id" => 1, "name"=> "lb"}], "lb")
+  iex>label_member?([%{"id" => 1, "name"=> "lb"}], "lb")
   true
-  iex> Dwylbot.Rules.Helpers.label_member?([%{"id" => 1, "name" => "lb"}], "er")
+  iex>label_member?([%{"id" => 1, "name" => "lb"}], "er")
   false
   """
   def label_member?(list_labels, label) do
     list_labels
-    |> Enum.map(fn(l) -> l["name"] end)
+    |> Enum.map(&(&1["name"]))
     |> Enum.member?(label)
   end
 end

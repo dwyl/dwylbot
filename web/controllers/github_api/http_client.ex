@@ -110,11 +110,7 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     |> PP.parse!
     |> Enum.map(fn(pr) ->
       Map.merge(
-        get_data(
-          token,
-          %{"pull_request" => %{"url" => pr["url"]}},
-          "pull_request"
-        ),
+        get_data(token, %{"pull_request" => %{"url" => pr["url"]}}, "pull_request"),
         get_data(token, %{"issue" => %{"url" => pr["issue_url"]}}, "issue")
       )
     end)

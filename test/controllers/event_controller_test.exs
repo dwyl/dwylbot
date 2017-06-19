@@ -2,7 +2,7 @@ defmodule Dwylbot.EventTestController do
   use Dwylbot.ConnCase
   alias Poison.Parser, as: PP
   alias Plug.Conn
-  doctest Dwylbot.Rules.Helpers
+  doctest Dwylbot.Rules.Helpers, import: true
 
   @fixtures [
     %{payload: "add_label", event: "issues" },
