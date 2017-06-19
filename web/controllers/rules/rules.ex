@@ -4,11 +4,11 @@ defmodule Dwylbot.Rules do
   """
   alias Dwylbot.Rules.List, as: RulesList
 
-  def apply_and_check_errors(payload, event_type) do
+  def apply_and_check_errors(payload, event_type, token) do
     rules = RulesList.get_rules(event_type)
     rules
     |> Enum.filter(fn(m) -> apply(m, :apply?, [payload]) end)
-    |> Enum.map(fn(m) -> apply(m, :check, [payload]) end)
+    |> Enum.map(fn(m) -> apply(m, :check, [payload, false, token]) end)
     |> Enum.filter(fn(e) -> e != nil end)
   end
 
@@ -16,10 +16,10 @@ defmodule Dwylbot.Rules do
   load list of modules representing our rules
   and apply the rules to the payload to detect any errors
   """
-  def check_errors(payload, event_type) do
+  def check_errors(payload, event_type, token) do
     rules = RulesList.get_rules(event_type)
     rules
-    |> Enum.map(fn(m) -> apply(m, :check, [payload]) end)
+    |> Enum.map(fn(m) -> apply(m, :check, [payload, true, token]) end)
     |> Enum.filter(fn(e) -> e != nil end)
   end
 
