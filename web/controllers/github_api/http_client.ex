@@ -65,6 +65,7 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
 
         Any questions, complaints, feedback, contributions?
         [![Discuss](https://img.shields.io/badge/discuss-with%20us-brightgreen.svg?style=flat)](https://github.com/dwyl/dwylbot/issues "Discuss your ideas/suggestions with us!")
+        If you prefer, you can also send us anonymous feedback: https://dwyl-feedback.herokuapp.com/feedback/new
         """
         message = comment <> feedback
         url
