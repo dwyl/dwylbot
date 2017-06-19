@@ -21,7 +21,7 @@ defmodule Dwylbot.GithubAPI.InMemory do
     "token_installation_1234"
   end
 
-  def get_data(_token, _payload, "issues") do
+  def get_data(_token, _payload, "issue") do
     issue = "./test/fixtures/issue.json"
     |> File.read!()
     |> PP.parse!()
@@ -33,6 +33,18 @@ defmodule Dwylbot.GithubAPI.InMemory do
     |> File.read!()
     |> PP.parse!()
     %{"pull_request" => pr}
+  end
+
+  def get_data(_token, _payload, "list_pull_requests") do
+    pr = "./test/fixtures/pr.json"
+    |> File.read!()
+    |> PP.parse!()
+
+    issue = "./test/fixtures/issue_pr.json"
+    |> File.read!()
+    |> PP.parse!()
+
+    [%{"pull_request" => pr, "issue" => issue}]
   end
 
   def report_error(_token, _error) do

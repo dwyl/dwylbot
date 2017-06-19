@@ -3,18 +3,22 @@ defmodule Dwylbot.Rules.List do
   List of modules errors to check on Github event
   Each module must implement apply and check functions
   """
+  alias Dwylbot.Rules.Issue
+  alias Dwylbot.Rules.PR
+
   def get_rules(event_type) do
     case event_type do
       "issues" ->
         [
-          Dwylbot.Rules.Issue.Inprogress,
-          Dwylbot.Rules.Issue.Noassignees,
-          Dwylbot.Rules.Issue.TimeEstimation,
-          Dwylbot.Rules.Issue.NoDescription
+          Issue.Inprogress,
+          Issue.Noassignees,
+          Issue.TimeEstimation,
+          Issue.NoDescription
         ]
       "pull_request" ->
         [
-          Dwylbot.Rules.PR.NoDescription
+          PR.NoDescription,
+          PR.MergeConflict
         ]
       _ -> []
     end

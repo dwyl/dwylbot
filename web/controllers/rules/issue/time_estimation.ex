@@ -3,12 +3,15 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
   Check errors for "in-progress and not time estimation" errors
   """
   alias Dwylbot.Rules.Helpers
+  @github_api Application.get_env(:dwylbot, :github_api)
 
   def apply?(payload) do
     payload["action"] == "labeled" && payload["label"]["name"] == "in-progress"
   end
 
-  def check(payload) do
+  def check(payload, get_data?, token) do
+    payload = (get_data? && @github_api.get_data(token, payload, "issue"))
+              || payload
     labels = payload["issue"]["labels"]
     in_progress = Enum.any?(labels, fn(l) -> l["name"] == "in-progress" end)
     estimation = labels
@@ -23,7 +26,8 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
             url: payload["issue"]["comments_url"]
           }
         ],
-        wait: Helpers.wait(Mix.env, 30_000, 1000, 1)
+        wait: Helpers.wait(Mix.env, 30_000, 1000, 1),
+        verify: true
       }
     else
       nil

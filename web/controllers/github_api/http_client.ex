@@ -69,10 +69,25 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
         message = comment <> feedback
         url
         |> HTTPoison.post!(Poison.encode!(%{body: message}), header(token))
+
+      %{add_assignees: assignees, url: url} ->
+        url
+        |> HTTPoison.post!(
+          Poison.encode!(%{assignees: assignees}), header(token)
+        )
+
+      %{remove_assignees: assignees, url: url} ->
+        HTTPoison.request!(
+          :delete, url, Poison.encode!(%{assignees: assignees}), header(token)
+        )
+
+      %{replace_labels: labels, url: url} ->
+        url
+        |> HTTPoison.put!(Poison.encode!(labels), header(token))
     end
   end
 
-  def get_data(token, payload, "issues") do
+  def get_data(token, payload, "issue") do
     issue = payload["issue"]["url"]
     |> HTTPoison.get!(header(token), [])
     |> Map.fetch!(:body)
@@ -86,6 +101,19 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     |> Map.fetch!(:body)
     |> PP.parse!
     %{"pull_request" => pr}
+  end
+
+  def get_data(token, payload, "list_pull_requests") do
+    "#{@github_root}/repos/#{payload["repository"]["full_name"]}/pulls"
+    |> HTTPoison.get!(header(token), [])
+    |> Map.fetch!(:body)
+    |> PP.parse!
+    |> Enum.map(fn(pr) ->
+      Map.merge(
+        get_data(token, %{"pull_request" => %{"url" => pr["url"]}}, "pull_request"),
+        get_data(token, %{"issue" => %{"url" => pr["issue_url"]}}, "issue")
+      )
+    end)
   end
 
 end
