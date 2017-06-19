@@ -64,6 +64,24 @@ We refer to this as our "Workflow".
 `dwylbot` helps the humans learn & follow the Workflow
 so we ***communicate better*** and ***get more done***!
 
+## _Install_
+
+To install and manage _dwylbot_ on your repositories:
+
+- visit the _[dwylbot home page](https://dwylbot.herokuapp.com/)_ or you can access directly the _dwylbot_ installation page: https://github.com/apps/dwylbot
+- click on "Manage dwylbot installations" button. This will open the _dwylbot_ github app page.
+  ![configure-dwylbot](https://user-images.githubusercontent.com/6057298/27295764-fadffbb2-5515-11e7-85fb-dc267e462c15.png)
+
+- click ```configure``` to select the organisations where you want dwylbot active on
+  ![configure-orgs](https://user-images.githubusercontent.com/6057298/27295790-0e296884-5516-11e7-9840-6e41c153e67c.png)
+
+- you can install _dwylbot_ on all the repositories of the organisation or you can choose some specific repositories
+  ![select-repos](https://user-images.githubusercontent.com/6057298/27295823-2971c898-5516-11e7-88e0-6e37e7acd5ba.png)
+
+- click ```install```. _dwylbot_ is now installed :tada: Just use as normal Github, _dwylbot_ will help you and your team to enhance your workflow.
+
+
+
 ## _How_?
 
 This project is written in `Elixir` and uses a `Phoenix` web server
@@ -172,13 +190,13 @@ Given your Phoenix knowledge, you _know_ that the _first_ place to look
 when you want to _understand_ <br />a Phoenix project is:
 [`web/router.ex`](https://github.com/dwyl/dwylbot/blob/master/web/router.ex)
 
-In this case we only have one (_interesting_) route: `/webhooks/create`
+In this case we only have one (_interesting_) route: `/event/new`
 
 
 #### Tests!
 
 
-### Make a `cURL` Request to the `POST /webhooks/create`
+### Make a `cURL` Request to the `POST /event/new`
 
 Need an example GitHub Webhook request payload for this...
 see: https://github.com/dwyl/dwylbot/issues/6#issuecomment-286387463
