@@ -9,7 +9,7 @@ defmodule Dwylbot.EventController do
   def new(conn, payload) do
     token = @github_api.get_installation_token(payload["installation"]["id"])
     [event_type | _] = Conn.get_req_header conn, "x-github-event"
-    errors = Rules.apply_and_check_errors(payload, event_type)
+    errors = Rules.apply_and_check_errors(payload, event_type, token)
     errors
     |> Enum.each(fn(error) ->
          spawn(WAIT, :delay, [error, payload, event_type, token])

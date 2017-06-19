@@ -14,7 +14,8 @@ defmodule Dwylbot.Rules.List do
         ]
       "pull_request" ->
         [
-          Dwylbot.Rules.PR.NoDescription
+          Dwylbot.Rules.PR.NoDescription,
+          Dwylbot.Rules.PR.MergeConflict
         ]
       _ -> []
     end
