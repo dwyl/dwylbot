@@ -61,8 +61,14 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
   defp post_action(action, token) do
     case action do
       %{comment: comment, url: url} ->
+        feedback = """
+
+        Any questions, complaints, feedback, contributions?
+        [![Discuss](https://img.shields.io/badge/discuss-with%20us-brightgreen.svg?style=flat)](https://github.com/dwyl/dwylbot/issues "Discuss your ideas/suggestions with us!")
+        """
+        message = comment <> feedback
         url
-        |> HTTPoison.post!(Poison.encode!(%{body: comment}), header(token))
+        |> HTTPoison.post!(Poison.encode!(%{body: message}), header(token))
     end
   end
 
