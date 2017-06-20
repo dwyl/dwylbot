@@ -22,6 +22,10 @@ defmodule Dwylbot.Rules.Issue.Inprogress do
           %{
             comment: payload["sender"] && error_message(payload["sender"]["login"]),
             url: payload["issue"]["comments_url"]
+          },
+          %{
+            add_assignees: [payload["sender"]["login"]],
+            url: "#{payload["issue"]["url"]}/assignees"
           }
         ],
         wait: Helpers.wait(Mix.env, 30_000, 1000, 1),
