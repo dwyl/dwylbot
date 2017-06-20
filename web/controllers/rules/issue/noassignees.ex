@@ -35,8 +35,8 @@ defmodule Dwylbot.Rules.Issue.Noassignees do
 
   defp error_message(login) do
     """
-    :warning: @#{login} issue has no **assignee** but is still `in-progress`. Who is working on it?
-    Please assign a user to this issue or remove the `in-progress` label. Thanks! :heart:
+    :warning: @#{login} the assignee for this issue has been removed with the `in-progress` label still attached.
+    Please remove the `in-progress` label if this issue is no longer being worked on or assign a user to this issue if it is still in progress.
     """
   end
 end
