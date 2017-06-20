@@ -85,6 +85,10 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
       %{replace_labels: labels, url: url} ->
         url
         |> HTTPoison.put!(Poison.encode!(labels), header(token))
+
+      %{add_labels: labels, url: url} ->
+        url
+        |> HTTPoison.post!(Poison.encode!(labels), header(token))
     end
   end
 

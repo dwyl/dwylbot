@@ -19,7 +19,8 @@ defmodule Dwylbot.Rules.List do
         [
           PR.NoDescription,
           PR.MergeConflict,
-          PR.NoAssignee
+          PR.NoAssignee,
+          PR.AwaitingReview
         ]
       _ -> []
     end
