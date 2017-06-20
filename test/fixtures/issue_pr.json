@@ -28,13 +28,6 @@
     "site_admin": false
   },
   "labels": [
-    {
-      "id": 624855447,
-      "url": "https://api.github.com/repos/SimonLab/github_app/labels/merge-conflicts",
-      "name": "merge-conflicts",
-      "color": "e74c3c",
-      "default": false
-    }
   ],
   "state": "open",
   "locked": false,

@@ -14,7 +14,8 @@ defmodule Dwylbot.Rules.PR.MergeConflict do
 
     actions = payload
     |> Enum.filter(fn(pr) ->
-      !pr["pull_request"]["mergeable"]
+      pr["pull_request"]["mergeable"] == false
+      && !Helpers.label_member?(pr["issue"]["labels"], "merge-conflicts")
     end)
     |> Enum.map(fn(pr) ->
       [
@@ -42,7 +43,7 @@ defmodule Dwylbot.Rules.PR.MergeConflict do
       %{
         error_type: "pr_merge_conflict",
         actions: actions,
-        wait: Helpers.wait(Mix.env, 10_000, 1000, 1),
+        wait: Helpers.wait(Mix.env, 40_000, 1000, 1),
         verify: false
       }
     else
