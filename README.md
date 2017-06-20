@@ -78,7 +78,7 @@ To install and manage _dwylbot_ on your repositories:
 - you can install _dwylbot_ on all the repositories of the organisation or you can choose some specific repositories
   ![select-repos](https://user-images.githubusercontent.com/6057298/27295823-2971c898-5516-11e7-88e0-6e37e7acd5ba.png)
 
-- click ```install```. _dwylbot_ is now installed :tada: Just use as normal Github, _dwylbot_ will help you and your team to enhance your workflow.
+- click ```install```. _dwylbot_ is now installed :tada: Just use Github as normal and _dwylbot_ will help enhance your team's workflow.
 
 
 
