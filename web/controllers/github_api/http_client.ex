@@ -96,6 +96,14 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     %{"issue" => issue}
   end
 
+  def get_data(token, payload, "issue_from_pr") do
+    issue = payload["pull_request"]["issue_url"]
+    |> HTTPoison.get!(header(token), [])
+    |> Map.fetch!(:body)
+    |> PP.parse!
+    %{"issue" => issue, "pull_request" => payload}
+  end
+
   def get_data(token, payload, "pull_request") do
     pr = payload["pull_request"]["url"]
     |> HTTPoison.get!(header(token), [])
