@@ -39,7 +39,7 @@ defmodule Dwylbot.Rules.Issue.Inprogress do
   defp error_message(login) do
     """
     @#{login} the `in-progress` label has been added to this issue **without an Assignee**.
-    Please assign a user to this issue before applying the `in-progress label`.
+    dwylbot has automatically assigned you.
     """
   end
 end
