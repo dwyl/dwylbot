@@ -5,6 +5,7 @@ defmodule Dwylbot.Rules.List do
   """
   alias Dwylbot.Rules.Issue
   alias Dwylbot.Rules.PR
+  alias Dwylbot.Rules.Status
 
   def get_rules(event_type) do
     case event_type do
@@ -21,6 +22,10 @@ defmodule Dwylbot.Rules.List do
           PR.MergeConflict,
           PR.NoAssignee,
           PR.AwaitingReview
+        ]
+      "status" ->
+        [
+          Status.TravisFailure
         ]
       _ -> []
     end

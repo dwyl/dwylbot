@@ -58,6 +58,17 @@ defmodule Dwylbot.GithubAPI.InMemory do
     [%{"pull_request" => pr, "issue" => issue}]
   end
 
+  def get_data(_token, _payload, "issue_from_status") do
+    issue = "./test/fixtures/issue_from_pr_failing.json"
+    |> File.read!()
+    |> PP.parse!()
+
+    pr = "./test/fixtures/pr_failing.json"
+    |> File.read!()
+    |> PP.parse!()
+    %{"issue" => issue, "pull_request" => pr}
+  end
+
   def report_error(_token, _error) do
     %{ok: 200}
   end

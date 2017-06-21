@@ -6,9 +6,7 @@ defmodule Dwylbot.Rules.PR.NoAssignee do
   @github_api Application.get_env(:dwylbot, :github_api)
 
   def apply?(payload) do
-    (payload["action"] == "labeled")
-    || (payload["action"] == "unassigned")
-    || (payload["action"] == "assigned")
+    payload["action"] in ~w(labeled unassigned assigned)
   end
 
   def check(payload, _get_data?, token) do
