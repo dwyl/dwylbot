@@ -41,7 +41,22 @@ in your commit messages so it is clear what each commit is for._" <br />
 when you want someone to review your work..._" <br />
 > "_Please only assign a Pull Request for review
 once all the tests have passed on CI..._" <br />
-> For a **list** of these common scenarios see:
+
+We've devised a set of rules and actions to respond to these problems, they look like this:
+
+| Category      | Rule                                                                               | dwylbot comments                                                                                                                                                                                                                                                                                                      | Labels changed                                                                   |
+|---------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| Pull Requests | "awaiting-review" and a merge conflict, [#64](https://github.com/dwyl/dwylbot/issues/64)                                        | :warning: @username, the pull request has a **merge conflict**., Please resolve the conflict and reassign when ready :+1:, Thanks!                                                                                                                                                                                    | remove "awaiting-review" and replace with "merge-conflicts". @username assigned. |
+|               | "awaiting-review" with no assignees                                                | :warning: @username, the pull request is in "awaiting-review" but doesn't have a correct assignee. Please assign someone to review the pull request, thanks.                                                                                                                                                          | -                                                                                |
+|               | Must have a description, [#98](https://github.com/dwyl/dwylbot/issues/98)                                                       | :stop_sign: @#{login}, the pull request has no **description!**, Please add more details to help us understand the context of the pull request, Please read our [Contribution guide](https://github.com/dwyl/contributing#notes-on-creating-good-pull-requests) on how to create a good pull request, Thanks! :heart: | -                                                                                |
+|               | If a PR has a reviewer, must have "awaiting-review" label and reviewer as assignee | -                                                                                                                                                                                                                                                                                                                     | reviewer added as assignee, "awaiting-review" label added.                       |
+|               |                                                                                    |                                                                                                                                                                                                                                                                                                                       |                                                                                  |
+| Issues        | Must have a description, [#76](https://github.com/dwyl/dwylbot/issues/76)                                                       | :warning: @username, this issue has no description. Please add a description to help others understand the context of this issue.                                                                                                                                                                                     | -                                                                                |
+|               | "in-progress" label with no assignee, [#7](https://github.com/dwyl/dwylbot/issues/7)                                           | @username the `in-progress` label has been added to this issue **without an Assignee**. dwylbot has automatically assigned you.                                                                                                                                                                                       | @username assigned to issue.                                                     |
+|               | "in progress" label with assignee removed, [#71](https://github.com/dwyl/dwylbot/issues/71)                                     | :warning: @username the assignee for this issue has been removed with the `in-progress` label still attached. Please remove the `in-progress` label if this issue is no longer being worked on or assign a user to this issue if it is still in progress.                                                             | -                                                                                |
+|               | "in-progress" label with no time estimate, [#61](https://github.com/dwyl/dwylbot/issues/61)                                     | @username the `in-progress` label has been added to this issue **without a time estimation**. Please add a time estimation to this issue before applying the `in-progress` label.                                                                                                                                     | -                                                                                |
+
+> For a **list** of rules we're still implementing check out:
 https://github.com/dwyl/dwylbot/issues/5
 
 `dwylbot` ***automates*** giving "***workflow related feedback***"
@@ -55,27 +70,25 @@ We use GitHub as our
 (_one place to keep all our information
   so we don't lose anything important!_). <br />
 We _also_ use GitHub to ***discuss*** questions/ideas/features/improvements,
-***estimate*** the effort required to _implement_ an idea <br />
-(_or "fix" an existing feature that is not working as expected_)
-and then to ***track*** the ***progress*** while the work is being done and
-***record*** how much ***time*** a person spent on the task/feature.
-We refer to this as our "Workflow".
+***estimate*** the effort required to _implement_ an idea (_or "fix" an existing feature that is not working as expected_) and then to ***track*** the ***progress*** while the work is being done and
+***record*** how much ***time*** a person spent on the task/feature.<br />
+We refer to this as our "workflow".
 
-`dwylbot` helps the humans learn & follow the Workflow
+`dwylbot` helps the humans learn & follow the workflow
 so we ***communicate better*** and ***get more done***!
 
 ## _Install_
 
 To install and manage _dwylbot_ on your repositories:
 
-- visit the _[dwylbot home page](https://dwylbot.herokuapp.com/)_ or you can access directly the _dwylbot_ installation page: https://github.com/apps/dwylbot
-- click on "Manage dwylbot installations" button. This will open the _dwylbot_ github app page.
+- visit the _[dwylbot home page](https://dwylbot.herokuapp.com/)_ or you can directly access the _dwylbot_ installation page: https://github.com/apps/dwylbot
+- click on "Manage dwylbot installations". This will open the _dwylbot_ github app page.
   ![configure-dwylbot](https://user-images.githubusercontent.com/6057298/27295764-fadffbb2-5515-11e7-85fb-dc267e462c15.png)
 
-- click ```configure``` to select the organisations where you want dwylbot active on
+- click ```configure``` to select the organisations where you want dwylbot to operate
   ![configure-orgs](https://user-images.githubusercontent.com/6057298/27295790-0e296884-5516-11e7-9840-6e41c153e67c.png)
 
-- you can install _dwylbot_ on all the repositories of the organisation or you can choose some specific repositories
+- you can install _dwylbot_ on all the repositories of the organisation or you can select specific repositories
   ![select-repos](https://user-images.githubusercontent.com/6057298/27295823-2971c898-5516-11e7-88e0-6e37e7acd5ba.png)
 
 - click ```install```. _dwylbot_ is now installed :tada: Just use Github as normal and _dwylbot_ will help enhance your team's workflow.
@@ -207,7 +220,7 @@ See: https://developer.github.com/webhooks/creating/
 ## tl;dr
 
 
-on the team knows _exactly_ what is going on
+on the team no one knows _exactly_ what is going on
 at all times without having to _ask_.
 
 With our GitHub-based Workflow,
@@ -215,17 +228,15 @@ we _successfully_ avoid the need for "***project status update meetings***":
 ![status updates](https://cloud.githubusercontent.com/assets/194400/24032230/cc734b34-0ade-11e7-9a02-33aa0c832085.png)
 
 
-Anyone who has _never_ worked in a "_really_ big" company where
-people have [_meetings about having meetings_](https://www.google.co.uk/search?q=meetings+about+meetings&tbm=isch)
-<br />
-Can feel like
-"_there are **too many steps** to **get work done**..._".<br />
-To those people we say: "_you have **Three Options**:_"
+For anyone who has _never_ worked in a "_really_ big" company where
+people have [_meetings about having meetings_](https://www.google.co.uk/search?q=meetings+about+meetings&tbm=isch) and it
+can feel like "_there are **too many steps** to **get work done**..._".<br />
+To those people we say: "_you have **three options**:_"
 1. Get a job at a "_Fortune 500 Company_"
 (_that has been around for 30+ years and claims to be "agile"_) <br />
  `.then` come back chat about getting work done in teams;
- _We will give you a shoulder to cry on! <br />
- we promise not to say "**I told you so**"
+ _we will give you a shoulder to cry on! <br />
+ We promise not to say "**I told you so**"
  when you tell us we were "**so right**"..._
 2. Get a job in a small company
 (_fewer than 10 people all co-located in the same office_)
@@ -235,12 +246,12 @@ _not_ having a clearly defined workflow. <br />
 `.then` try to _retrospectively_ apply a workflow and teach your colleagues
 how to cooperate effectively.
 3. _Trust_ those of us who _have_ ***felt the pain*** of working in (_multiple_)
-horribly complex companies and have _crafted_ a Workflow that ensures
+horribly complex companies and have _crafted_ a workflow that ensures
 the highest level of team communication/productivity.
 
 
 Organizations _regularly_ approach us
-to teach dwyl's Workflow to their team(s).
+to teach dwyl's workflow to their team(s).
 We have done many workshops to that end. <br />
 Sadly, delivering in-person training does not scale.
-So we decided to _automate_ our Workflow with `dwylbot`.
+So we decided to _automate_ our workflow with `dwylbot`.
