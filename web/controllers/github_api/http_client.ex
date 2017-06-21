@@ -89,6 +89,10 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
       %{add_labels: labels, url: url} ->
         url
         |> HTTPoison.post!(Poison.encode!(labels), header(token))
+
+      %{remove_label: label, url: url} ->
+        url <> "/#{label}"
+        |> HTTPoison.delete!(header(token), [])
     end
   end
 
@@ -127,6 +131,24 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
         get_data(token, %{"issue" => %{"url" => pr["issue_url"]}}, "issue")
       )
     end)
+  end
+
+  def get_data(token, payload, "issue_from_status") do
+    pull_request_payload = %{
+      "repository" => %{
+        "full_name" => payload["repository"]["full_name"]
+      }
+    }
+    pull_requests = get_data(token, pull_request_payload, "list_pull_requests")
+    branch_name = payload["branches"]
+    |> List.first()
+    |> Map.get("name")
+
+    pull_requests
+    |> Enum.filter(fn(data) ->
+      data["pull_request"]["head"]["label"] =~ branch_name
+    end)
+    |> List.first()
   end
 
 end
