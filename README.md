@@ -55,27 +55,25 @@ We use GitHub as our
 (_one place to keep all our information
   so we don't lose anything important!_). <br />
 We _also_ use GitHub to ***discuss*** questions/ideas/features/improvements,
-***estimate*** the effort required to _implement_ an idea <br />
-(_or "fix" an existing feature that is not working as expected_)
-and then to ***track*** the ***progress*** while the work is being done and
-***record*** how much ***time*** a person spent on the task/feature.
-We refer to this as our "Workflow".
+***estimate*** the effort required to _implement_ an idea (_or "fix" an existing feature that is not working as expected_) and then to ***track*** the ***progress*** while the work is being done and
+***record*** how much ***time*** a person spent on the task/feature.<br />
+We refer to this as our "workflow".
 
-`dwylbot` helps the humans learn & follow the Workflow
+`dwylbot` helps the humans learn & follow the workflow
 so we ***communicate better*** and ***get more done***!
 
 ## _Install_
 
 To install and manage _dwylbot_ on your repositories:
 
-- visit the _[dwylbot home page](https://dwylbot.herokuapp.com/)_ or you can access directly the _dwylbot_ installation page: https://github.com/apps/dwylbot
-- click on "Manage dwylbot installations" button. This will open the _dwylbot_ github app page.
+- visit the _[dwylbot home page](https://dwylbot.herokuapp.com/)_ or you can directly access the _dwylbot_ installation page: https://github.com/apps/dwylbot
+- click on "Manage dwylbot installations". This will open the _dwylbot_ github app page.
   ![configure-dwylbot](https://user-images.githubusercontent.com/6057298/27295764-fadffbb2-5515-11e7-85fb-dc267e462c15.png)
 
-- click ```configure``` to select the organisations where you want dwylbot active on
+- click ```configure``` to select the organisations where you want dwylbot to operate
   ![configure-orgs](https://user-images.githubusercontent.com/6057298/27295790-0e296884-5516-11e7-9840-6e41c153e67c.png)
 
-- you can install _dwylbot_ on all the repositories of the organisation or you can choose some specific repositories
+- you can install _dwylbot_ on all the repositories of the organisation or you can select specific repositories
   ![select-repos](https://user-images.githubusercontent.com/6057298/27295823-2971c898-5516-11e7-88e0-6e37e7acd5ba.png)
 
 - click ```install```. _dwylbot_ is now installed :tada: Just use Github as normal and _dwylbot_ will help enhance your team's workflow.
@@ -207,7 +205,7 @@ See: https://developer.github.com/webhooks/creating/
 ## tl;dr
 
 
-on the team knows _exactly_ what is going on
+on the team no one knows _exactly_ what is going on
 at all times without having to _ask_.
 
 With our GitHub-based Workflow,
@@ -215,17 +213,15 @@ we _successfully_ avoid the need for "***project status update meetings***":
 ![status updates](https://cloud.githubusercontent.com/assets/194400/24032230/cc734b34-0ade-11e7-9a02-33aa0c832085.png)
 
 
-Anyone who has _never_ worked in a "_really_ big" company where
-people have [_meetings about having meetings_](https://www.google.co.uk/search?q=meetings+about+meetings&tbm=isch)
-<br />
-Can feel like
-"_there are **too many steps** to **get work done**..._".<br />
-To those people we say: "_you have **Three Options**:_"
+For anyone who has _never_ worked in a "_really_ big" company where
+people have [_meetings about having meetings_](https://www.google.co.uk/search?q=meetings+about+meetings&tbm=isch) and it
+can feel like "_there are **too many steps** to **get work done**..._".<br />
+To those people we say: "_you have **three options**:_"
 1. Get a job at a "_Fortune 500 Company_"
 (_that has been around for 30+ years and claims to be "agile"_) <br />
  `.then` come back chat about getting work done in teams;
- _We will give you a shoulder to cry on! <br />
- we promise not to say "**I told you so**"
+ _we will give you a shoulder to cry on! <br />
+ We promise not to say "**I told you so**"
  when you tell us we were "**so right**"..._
 2. Get a job in a small company
 (_fewer than 10 people all co-located in the same office_)
@@ -235,12 +231,12 @@ _not_ having a clearly defined workflow. <br />
 `.then` try to _retrospectively_ apply a workflow and teach your colleagues
 how to cooperate effectively.
 3. _Trust_ those of us who _have_ ***felt the pain*** of working in (_multiple_)
-horribly complex companies and have _crafted_ a Workflow that ensures
+horribly complex companies and have _crafted_ a workflow that ensures
 the highest level of team communication/productivity.
 
 
 Organizations _regularly_ approach us
-to teach dwyl's Workflow to their team(s).
+to teach dwyl's workflow to their team(s).
 We have done many workshops to that end. <br />
 Sadly, delivering in-person training does not scale.
-So we decided to _automate_ our Workflow with `dwylbot`.
+So we decided to _automate_ our workflow with `dwylbot`.
