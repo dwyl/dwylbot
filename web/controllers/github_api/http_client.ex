@@ -85,6 +85,10 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
       %{replace_labels: labels, url: url} ->
         url
         |> HTTPoison.put!(Poison.encode!(labels), header(token))
+
+      %{add_labels: labels, url: url} ->
+        url
+        |> HTTPoison.post!(Poison.encode!(labels), header(token))
     end
   end
 
@@ -94,6 +98,14 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     |> Map.fetch!(:body)
     |> PP.parse!
     %{"issue" => issue}
+  end
+
+  def get_data(token, payload, "issue_from_pr") do
+    issue = payload["pull_request"]["issue_url"]
+    |> HTTPoison.get!(header(token), [])
+    |> Map.fetch!(:body)
+    |> PP.parse!
+    %{"issue" => issue, "pull_request" => payload}
   end
 
   def get_data(token, payload, "pull_request") do

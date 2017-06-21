@@ -28,6 +28,17 @@ defmodule Dwylbot.GithubAPI.InMemory do
     %{"issue" => issue}
   end
 
+  def get_data(_token, _payload, "issue_from_pr") do
+    issue = "./test/fixtures/issue_from_pr.json"
+    |> File.read!()
+    |> PP.parse!()
+
+    pr = "./test/fixtures/pr_no_assignee.json"
+    |> File.read!()
+    |> PP.parse!()
+    %{"issue" => issue, "pull_request" => pr}
+  end
+
   def get_data(_token, _payload, "pull_request") do
     pr = "./test/fixtures/pull_request.json"
     |> File.read!()

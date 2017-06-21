@@ -18,7 +18,9 @@ defmodule Dwylbot.Rules.List do
       "pull_request" ->
         [
           PR.NoDescription,
-          PR.MergeConflict
+          PR.MergeConflict,
+          PR.NoAssignee,
+          PR.AwaitingReview
         ]
       _ -> []
     end
