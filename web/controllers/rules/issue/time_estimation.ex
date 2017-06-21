@@ -37,7 +37,7 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
   defp error_message(login) do
     """
     @#{login} the `in-progress` label has been added to this issue **without a time estimation**.
-    Please add a time estimation to this issue before applying the `in-progress label`.
+    Please add a time estimation to this issue before applying the `in-progress` label.
     """
   end
 end
