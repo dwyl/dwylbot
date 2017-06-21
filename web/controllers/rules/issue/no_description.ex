@@ -32,10 +32,12 @@ defmodule Dwylbot.Rules.Issue.NoDescription do
 
   defp error_message(login) do
     """
-    :stop_sign: @#{login}, the issue has no **description!**
-    Please add more details to help us understand the context of the issue.
-    Please read our [Contribution guide](https://github.com/dwyl/contributing#part-1-describe-your-question-the-idea-or-user-story-in-an-issue) on how to create issue
-    Thanks! :heart:
+    :warning: @#{login}, this issue has no description. Please add a description to help others understand the context of this issue.
+
+    --
+
+    You can read more about how to create an issue in a dwyl repository [here](https://github.com/dwyl/contributing#part-1-describe-your-question-the-idea-or-user-story-in-an-issue).
+    Full guidelines for contributing to a dwyl repository can be found [here](https://github.com/dwyl/contributing/blob/master/README.md).
     """
   end
 end
