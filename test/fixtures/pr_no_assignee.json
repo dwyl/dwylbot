@@ -78,7 +78,25 @@
       }
     ],
     "requested_reviewers": [
-
+      {
+        "login": "dwylbot",
+        "id": 24862484,
+        "avatar_url": "https://avatars3.githubusercontent.com/u/24862484?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/dwylbot",
+        "html_url": "https://github.com/dwylbot",
+        "followers_url": "https://api.github.com/users/dwylbot/followers",
+        "following_url": "https://api.github.com/users/dwylbot/following{/other_user}",
+        "gists_url": "https://api.github.com/users/dwylbot/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/dwylbot/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/dwylbot/subscriptions",
+        "organizations_url": "https://api.github.com/users/dwylbot/orgs",
+        "repos_url": "https://api.github.com/users/dwylbot/repos",
+        "events_url": "https://api.github.com/users/dwylbot/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/dwylbot/received_events",
+        "type": "User",
+        "site_admin": false
+      }
     ],
     "milestone": null,
     "commits_url": "https://api.github.com/repos/SimonLab/github_app/pulls/24/commits",
