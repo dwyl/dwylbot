@@ -96,6 +96,10 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     end
   end
 
+
+  # get_data(url, token, _type)
+  # _type is only use for our mock to know which fixture file to load and reutrned
+
   def get_data(token, payload, "issue") do
     issue = payload["issue"]["url"]
     |> HTTPoison.get!(header(token), [])
