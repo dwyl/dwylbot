@@ -4,13 +4,14 @@ defmodule Dwylbot.Rules.PR.MergeConflict do
   """
   alias Dwylbot.Rules.Helpers
   @github_api Application.get_env(:dwylbot, :github_api)
+  @rule_name "pr_merge_conflicts"
 
   def apply?(payload) do
     payload["action"] == "closed" && payload["pull_request"]["merged"]
   end
 
   def check(payload, _get_data?, token) do
-    payload = @github_api.get_data(token, payload, "list_pull_requests")
+    payload = @github_api.get_pull_requests(token, payload, @rule_name)
 
     actions = payload
     |> Enum.filter(fn(pr) ->
@@ -41,7 +42,7 @@ defmodule Dwylbot.Rules.PR.MergeConflict do
 
     if length(actions) > 0 do
       %{
-        error_type: "pr_merge_conflict",
+        error_type: @rule_name,
         actions: actions,
         wait: Helpers.wait(Mix.env, 40_000, 1000, 1),
         verify: false

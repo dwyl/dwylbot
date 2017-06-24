@@ -4,14 +4,20 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
   """
   alias Dwylbot.Rules.Helpers
   @github_api Application.get_env(:dwylbot, :github_api)
+  @rule_name "issue_no_estimation"
 
   def apply?(payload) do
     payload["action"] == "labeled" && payload["label"]["name"] == "in-progress"
   end
 
   def check(payload, get_data?, token) do
-    payload = (get_data? && @github_api.get_data(token, payload, "issue"))
-              || payload
+    payload = if get_data? do
+      url = payload["issue"]["url"]
+      @github_api.get_data(token, %{"issue" => url}, @rule_name)
+    else
+      payload
+    end
+
     labels = payload["issue"]["labels"]
     in_progress = Enum.any?(labels, fn(l) -> l["name"] == "in-progress" end)
     estimation = labels
@@ -19,7 +25,7 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
     |> Enum.reduce(false, fn(x, acc) -> x || acc end)
     if in_progress && !estimation do
       %{
-        error_type: "issue_noestimation",
+        error_type: @rule_name,
         actions: [
           %{
             comment: payload["sender"] && error_message(payload["sender"]["login"]),

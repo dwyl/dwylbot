@@ -4,15 +4,20 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
   """
   alias Dwylbot.Rules.Helpers
   @github_api Application.get_env(:dwylbot, :github_api)
+  @rule_name "pr_awaiting_review"
 
   def apply?(payload) do
     (payload["action"] == "review_requested")
   end
 
   def check(payload, _get_data?, token) do
-    payload = @github_api.get_data(token, payload, "issue_from_pr")
+    urls = %{
+      "issue" => payload["pull_request"]["issue_url"],
+      "pull_request" => payload["pull_request"]["url"]
+      }
+    payload = @github_api.get_data(token, urls, @rule_name)
 
-    reviewers = payload["pull_request"]["pull_request"]["requested_reviewers"]
+    reviewers = payload["pull_request"]["requested_reviewers"]
     |> Enum.map(&(&1["login"]))
 
     in_progress = payload["issue"]["labels"]
@@ -20,7 +25,7 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
 
     if (!Enum.empty?(reviewers) && !in_progress) do
       %{
-        error_type: "pr_awaiting_review",
+        error_type: @rule_name,
         actions: [
           %{
             add_labels: ["awaiting-review"],

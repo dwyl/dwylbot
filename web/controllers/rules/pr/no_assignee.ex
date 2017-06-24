@@ -4,23 +4,26 @@ defmodule Dwylbot.Rules.PR.NoAssignee do
   """
   alias Dwylbot.Rules.Helpers
   @github_api Application.get_env(:dwylbot, :github_api)
+  @rule_name "pr_no_assignee"
 
   def apply?(payload) do
     payload["action"] in ~w(labeled unassigned assigned)
   end
 
   def check(payload, _get_data?, token) do
-    payload = @github_api.get_data(token, payload, "issue_from_pr")
+    author_event = payload["sender"]["login"]
+    url = payload["pull_request"]["issue_url"]
+    payload = @github_api.get_data(token, %{"issue" => url}, @rule_name)
     labels = payload["issue"]["labels"]
     assignees = payload["issue"]["assignees"]
     author = payload["issue"]["user"]["login"]
     incorrect_assignee = wrong_assignee(assignees, author)
     if Helpers.label_member?(labels, "awaiting-review") && incorrect_assignee do
       %{
-        error_type: "pr_no_assignee",
+        error_type: @rule_name,
         actions: [
           %{
-            comment: error_message(payload["pull_request"]["sender"]["login"]),
+            comment: error_message(author_event),
             url: payload["issue"]["comments_url"]
           }
         ],

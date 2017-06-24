@@ -5,20 +5,25 @@ defmodule Dwylbot.Rules.Issue.Noassignees do
   """
   alias Dwylbot.Rules.Helpers
   @github_api Application.get_env(:dwylbot, :github_api)
+  @rule_name "issue_unassigned_noassignees"
 
   def apply?(payload) do
     payload["action"] == "unassigned"
   end
 
   def check(payload, get_data?, token) do
-    payload = (get_data? && @github_api.get_data(token, payload, "issue"))
-              || payload
+    payload = if get_data? do
+      url = payload["issue"]["url"]
+      @github_api.get_data(token, %{"issue" => url}, @rule_name)
+    else
+      payload
+    end
     assignees = payload["issue"]["assignees"]
     labels = payload["issue"]["labels"]
     in_progress = Enum.any?(labels, fn(l) -> l["name"] == "in-progress" end)
     if in_progress && Enum.empty?(assignees) do
       %{
-        error_type: "issue_inprogress_noassignees",
+        error_type: @rule_name,
         actions: [
           %{
             comment: payload["sender"] && error_message(payload["sender"]["login"]),

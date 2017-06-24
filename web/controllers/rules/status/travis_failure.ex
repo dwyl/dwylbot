@@ -4,17 +4,18 @@ defmodule Dwylbot.Rules.Status.TravisFailure do
   """
   alias Dwylbot.Rules.Helpers
   @github_api Application.get_env(:dwylbot, :github_api)
+  @rule_name "pr_failing_test"
 
   def apply?(payload) do
     payload["state"] == "failure"
   end
 
   def check(payload, _get_data?, token) do
-    payload = @github_api.get_data(token, payload, "issue_from_status")
+    payload = @github_api.get_issue_from_status(token, payload, @rule_name)
     labels = payload["issue"]["labels"]
     if Helpers.label_member?(labels, "awaiting-review") do
       %{
-        error_type: "pr_failing_test",
+        error_type: @rule_name,
         actions: [
           %{
             remove_assignees: get_assignees_login(payload["issue"]["assignees"]),
