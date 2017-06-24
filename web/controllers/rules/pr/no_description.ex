@@ -4,18 +4,23 @@ defmodule Dwylbot.Rules.PR.NoDescription do
   """
   alias Dwylbot.Rules.Helpers
   @github_api Application.get_env(:dwylbot, :github_api)
+  @rule_name "pr_no_description"
 
   def apply?(payload) do
     payload["action"] == "opened"
   end
 
   def check(payload, get_data?, token) do
-    payload = (get_data? && @github_api.get_data(token, payload, "pull_request"))
-              || payload
+    payload = if get_data? do
+      url = payload["pull_request"]["url"]
+      @github_api.get_data(token, %{"pull_request" => url}, @rule_name)
+    else
+      payload
+    end
     description = String.trim payload["pull_request"]["body"]
     if String.length(description) == 0 do
       %{
-        error_type: "pr_no_description",
+        error_type: @rule_name,
         actions: [
           %{
             comment: payload["sender"] && error_message(payload["sender"]["login"]),

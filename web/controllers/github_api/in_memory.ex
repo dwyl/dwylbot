@@ -21,52 +21,57 @@ defmodule Dwylbot.GithubAPI.InMemory do
     "token_installation_1234"
   end
 
-  def get_data(_token, _payload, "issue") do
-    issue = "./test/fixtures/issue.json"
-    |> File.read!()
-    |> PP.parse!()
-    %{"issue" => issue}
+  def get_data(_token, _urls, rule_name) do
+    mock = get_mock_file(rule_name)
+    mock
+    |> Enum.map(fn({type, file}) ->
+      data = file
+      |> File.read!()
+      |> PP.parse!()
+      {type, data}
+    end)
+    |> Enum.into(%{})
   end
 
-  def get_data(_token, _payload, "issue_from_pr") do
-    issue = "./test/fixtures/issue_from_pr.json"
-    |> File.read!()
-    |> PP.parse!()
-
-    pr = "./test/fixtures/pr_no_assignee.json"
-    |> File.read!()
-    |> PP.parse!()
-    %{"issue" => issue, "pull_request" => pr}
+  defp get_mock_file(rule_name) do
+    config = %{
+      "issue_inprogress_noassignees" =>
+        [{"issue", "./test/fixtures/issue.json"}],
+      "issue_no_description" =>
+        [{"issue", "./test/fixtures/issue.json"}],
+      "issue_unassigned_noassignees" =>
+        [{"issue", "./test/fixtures/issue.json"}],
+       "issue_no_estimation" =>
+        [{"issue", "./test/fixtures/issue.json"}],
+      "pr_no_assignee" =>
+        [{"issue", "./test/fixtures/issue_from_pr.json"}],
+      "pr_no_description" =>
+        [{"pull_request", "./test/fixtures/pull_request.json"}],
+      "pr_merge_conflicts" =>
+        [
+          {"issue", "./test/fixtures/issue.json"},
+          {"pull_request", "./test/fixtures/pr.json"}
+        ],
+      "pr_awaiting_review" =>
+        [
+          {"issue", "./test/fixtures/issue_from_pr.json"},
+          {"pull_request", "./test/fixtures/pr_reviewers-not_inprogress.json"}
+        ],
+      "pr_failing_test" =>
+        [
+          {"issue", "./test/fixtures/issue_from_pr_failing.json"},
+          {"pull_request", "./test/fixtures/pr_failing.json"}
+        ],
+    }
+    Map.get(config, rule_name)
   end
 
-  def get_data(_token, _payload, "pull_request") do
-    pr = "./test/fixtures/pull_request.json"
-    |> File.read!()
-    |> PP.parse!()
-    %{"pull_request" => pr}
+  def get_pull_requests(_token, _payload, rule_name) do
+    [get_data(nil, nil, rule_name)]
   end
 
-  def get_data(_token, _payload, "list_pull_requests") do
-    pr = "./test/fixtures/pr.json"
-    |> File.read!()
-    |> PP.parse!()
-
-    issue = "./test/fixtures/issue_pr.json"
-    |> File.read!()
-    |> PP.parse!()
-
-    [%{"pull_request" => pr, "issue" => issue}]
-  end
-
-  def get_data(_token, _payload, "issue_from_status") do
-    issue = "./test/fixtures/issue_from_pr_failing.json"
-    |> File.read!()
-    |> PP.parse!()
-
-    pr = "./test/fixtures/pr_failing.json"
-    |> File.read!()
-    |> PP.parse!()
-    %{"issue" => issue, "pull_request" => pr}
+  def get_issue_from_status(_token, _payload, rule_name) do
+    get_data(nil, nil, rule_name)
   end
 
   def report_error(_token, _error) do

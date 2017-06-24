@@ -96,50 +96,43 @@ defmodule Dwylbot.GithubAPI.HTTPClient do
     end
   end
 
-  def get_data(token, payload, "issue") do
-    issue = payload["issue"]["url"]
-    |> HTTPoison.get!(header(token), [])
-    |> Map.fetch!(:body)
-    |> PP.parse!
-    %{"issue" => issue}
+  def get_data(token, urls, _module_rule) do
+    urls
+    |> Enum.map(fn({type, url}) ->
+      {type, get(token, url)}
+    end)
+    |> Enum.into(%{})
   end
 
-  def get_data(token, payload, "issue_from_pr") do
-    issue = payload["pull_request"]["issue_url"]
+  defp get(token, url) do
+    url
     |> HTTPoison.get!(header(token), [])
     |> Map.fetch!(:body)
-    |> PP.parse!
-    %{"issue" => issue, "pull_request" => payload}
+    |> PP.parse!()
   end
 
-  def get_data(token, payload, "pull_request") do
-    pr = payload["pull_request"]["url"]
-    |> HTTPoison.get!(header(token), [])
-    |> Map.fetch!(:body)
-    |> PP.parse!
-    %{"pull_request" => pr}
-  end
-
-  def get_data(token, payload, "list_pull_requests") do
+  def get_pull_requests(token, payload, rule_name) do
     "#{@github_root}/repos/#{payload["repository"]["full_name"]}/pulls"
     |> HTTPoison.get!(header(token), [])
     |> Map.fetch!(:body)
     |> PP.parse!
     |> Enum.map(fn(pr) ->
-      Map.merge(
-        get_data(token, %{"pull_request" => %{"url" => pr["url"]}}, "pull_request"),
-        get_data(token, %{"issue" => %{"url" => pr["issue_url"]}}, "issue")
-      )
+      urls = %{
+        "issue" => pr["issue_url"],
+        "pull_request" => pr["url"]
+      }
+      get_data(token, urls, rule_name)
     end)
   end
 
-  def get_data(token, payload, "issue_from_status") do
+  def get_issue_from_status(token, payload, rule_name) do
     pull_request_payload = %{
       "repository" => %{
         "full_name" => payload["repository"]["full_name"]
       }
     }
-    pull_requests = get_data(token, pull_request_payload, "list_pull_requests")
+    pull_requests = get_pull_requests(token, pull_request_payload, rule_name)
+
     branch_name = payload["branches"]
     |> List.first()
     |> Map.get("name")
