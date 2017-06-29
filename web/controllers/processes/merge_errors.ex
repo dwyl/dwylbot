@@ -5,32 +5,41 @@ defmodule Dwylbot.MergeErrors do
   use GenServer
 
   @github_api Application.get_env(:dwylbot, :github_api)
+  @time Application.get_env(:dwylbot, :time_merge_errors)
 
   def start_link(errors) do
     GenServer.start_link(__MODULE__, errors, name: __MODULE__)
   end
 
   def init(errors) do
-    Process.send_after(self(), :errors, 1000)
+    process_errors()
     {:ok, errors}
   end
 
-  def handle_info(:errors, errors) do
-    GenServer.cast(self(), {:process_errors, errors})
-    Process.send_after(self(), :errors, 5000)
+  def process_errors do
+    Process.send(__MODULE__, :errors, [])
+  end
+
+  def send_error(error) do
+    GenServer.cast(__MODULE__, {:error, error})
+  end
+
+  def handle_info(:errors, errors_state) do
+    GenServer.cast(__MODULE__, {:report_errors, errors_state})
+    Process.send_after(__MODULE__, :errors, @time)
     {:noreply, []}
   end
 
-  def handle_cast({:process_errors, errors}, state) do
+  def handle_cast({:report_errors, errors}, errors_state) do
     errors
     |> Enum.each(fn(err) ->
       @github_api.report_error(err.token, err)
      end)
 
-    {:noreply, state}
+    {:noreply, errors_state}
   end
 
-  def handle_cast({:error, error}, errors) do
-    {:noreply, [error | errors]}
+  def handle_cast({:error, error}, errors_state) do
+    {:noreply, [error | errors_state]}
   end
 end
