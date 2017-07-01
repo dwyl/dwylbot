@@ -3,7 +3,7 @@ defmodule Dwylbot.MergeErrors do
   GenServer, receive, merge and reports errors every 5s
   """
   use GenServer
-
+  alias Dwylbot.Rules.Join
   @github_api Application.get_env(:dwylbot, :github_api)
   @time Application.get_env(:dwylbot, :time_merge_errors)
 
@@ -31,7 +31,8 @@ defmodule Dwylbot.MergeErrors do
   end
 
   def handle_cast({:report_errors, errors}, errors_state) do
-    errors
+    joined_errors = Join.join(errors)
+    joined_errors
     |> Enum.each(fn(err) ->
       @github_api.report_error(err.token, err)
      end)

@@ -3,6 +3,7 @@ defmodule Dwylbot.MergeErrorsTest do
 
   test "send error" do
     error = %{
+      id: nil,
       token: 42,
       error_type: "issue_inprogress_noassignees",
       actions: [

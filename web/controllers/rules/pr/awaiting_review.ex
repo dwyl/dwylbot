@@ -25,6 +25,7 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
 
     if (!Enum.empty?(reviewers) && !in_progress) do
       %{
+        id: Helpers.get_id(payload),
         error_type: @rule_name,
         actions: [
           %{

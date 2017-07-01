@@ -42,6 +42,7 @@ defmodule Dwylbot.Rules.PR.MergeConflict do
 
     if length(actions) > 0 do
       %{
+        id: Helpers.get_id(payload),
         error_type: @rule_name,
         actions: actions,
         wait: Helpers.wait(Mix.env, 40_000, 1000, 1),

@@ -20,6 +20,7 @@ defmodule Dwylbot.Rules.PR.NoAssignee do
     incorrect_assignee = wrong_assignee(assignees, author)
     if Helpers.label_member?(labels, "awaiting-review") && incorrect_assignee do
       %{
+        id: Helpers.get_id(payload),
         error_type: @rule_name,
         actions: [
           %{
