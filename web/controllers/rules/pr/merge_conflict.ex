@@ -7,7 +7,8 @@ defmodule Dwylbot.Rules.PR.MergeConflict do
   @rule_name "pr_merge_conflicts"
 
   def apply?(payload) do
-    payload["action"] == "closed" && payload["pull_request"]["merged"]
+    (payload["action"] == "closed" && payload["pull_request"]["merged"])
+    || (payload["action"] == "labeled" && payload["label"]["name"] == "awaiting-review")
   end
 
   def check(payload, _get_data?, token) do
