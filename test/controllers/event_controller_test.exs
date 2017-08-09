@@ -11,6 +11,7 @@ defmodule Dwylbot.EventTestController do
     %{payload: "unassigned_inprogress", event: "issues" },
     %{payload: "pr_no_description", event: "pull_request" },
     %{payload: "pr_merge_conflict", event: "pull_request" },
+    %{payload: "pr_awaiting_review_merge_conflict", event: "pull_request" }, #https://git.io/v7XXq
     %{payload: "pr_no_assignee", event: "pull_request" },
     %{payload: "request_reviewer", event: "pull_request" },
     %{payload: "failing_test", event: "status" },
