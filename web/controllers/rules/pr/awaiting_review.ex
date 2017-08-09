@@ -50,9 +50,10 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
 
   defp error_message(login) do
     """
-    @#{login}, a reviewer has been added to the pull request.
-    The pull request looks ready for review (no "in-progress" label).
-    So the reviewer has been added as an assignee and the "awaiting-reivew" label as been added to.
+    @#{login}, the "in-progress" label has been removed from this pull request and a **Reviewer** has been added.
+    It appears that this pull request is ready for review, so the **Reviewer** has been added as an **Assignee**
+    and the "awaiting-review" label has been applied automatically.
+
     """
   end
 
