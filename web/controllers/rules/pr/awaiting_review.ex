@@ -23,7 +23,16 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
     in_progress = payload["issue"]["labels"]
     |> Helpers.label_member?("in-progress")
 
-    if (!Enum.empty?(reviewers) && !in_progress) do
+    url = Enum.join(["https://api.travis-ci.org/repos/", payload["pull_request"]["head"]["repo"]["full_name"], "/builds"])
+    headers = ["Authorization": :GITHUB_TRAVIS_ACCESS_TOKEN, "Accept": "application/vnd.travis-ci.2+json", "User-Agent": "MyClient/1.0.0", "Content-Type": "application/json"]
+    {:ok, response} = HTTPoison.get(url, headers)
+
+    prBuild = (Poison.decode!(response.body))["builds"]
+    |> Enum.find(fn(data) ->
+      data["pull_request_number"] == payload["pull_request"]["number"]
+      end)
+
+    if (!Enum.empty?(reviewers) && !in_progress && (prBuild["state"] != "failed")) do
       %{
         error_type: @rule_name,
         actions: [
