@@ -2,18 +2,17 @@ defmodule Dwylbot.Rules.Status.TravisFailure do
   @moduledoc """
   Check for test failing on PR with "awaiting-review" label
   """
-  alias Dwylbot.Rules.Helpers
-  alias Dwylbot.Commits
+  alias Dwylbot.{Rules.Helpers, Commits, Repo}
 
   @github_api Application.get_env(:dwylbot, :github_api)
   @rule_name "pr_failing_test"
 
 
   def apply?(payload) do
-    # insert/update the CI status https://git.io/v7xfe
-    on_conflict = [set: [ci_status: payload["state"]]]
-    {:ok, updated} = Dwylbot.Repo.insert(%Commits{ci_status: payload["state"], sha: payload["commit"]["sha"]},
-                               on_conflict: on_conflict, conflict_target: :sha)
+    ci_status = payload["state"]
+    sha = payload["commit"]["sha"]
+    changeset = Commits.changeset(%Commits{}, %{ci_status: ci_status, sha: sha})
+    updated = Repo.insert!(changeset)
 
     payload["state"] == "failure"
   end
