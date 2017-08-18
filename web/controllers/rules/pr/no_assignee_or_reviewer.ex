@@ -1,10 +1,10 @@
-defmodule Dwylbot.Rules.PR.NoAssignee do
+defmodule Dwylbot.Rules.PR.NoAssigneeOrReviewer do
   @moduledoc """
   Check for error when an PR has awaiting-review but no assignees
   """
   alias Dwylbot.Rules.Helpers
   @github_api Application.get_env(:dwylbot, :github_api)
-  @rule_name "pr_no_assignee"
+  @rule_name "pr_no_assignee_or_reviewer"
 
   def apply?(payload) do
     reviewers = payload["pull_request"]["requested_reviewers"]  |> Enum.map(&(&1["login"]))

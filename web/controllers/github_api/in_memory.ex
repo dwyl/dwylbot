@@ -43,8 +43,10 @@ defmodule Dwylbot.GithubAPI.InMemory do
         [{"issue", "./test/fixtures/issue.json"}],
        "issue_no_estimation" =>
         [{"issue", "./test/fixtures/issue.json"}],
-      "pr_no_assignee" =>
+      "pr_no_assignee_or_reviewer" =>
         [{"issue", "./test/fixtures/issue_from_pr.json"}],
+        "pr_reviewer_but_no_assignee" =>
+          [{"issue", "./test/fixtures/issue_from_pr.json"}],
       "pr_no_description" =>
         [{"pull_request", "./test/fixtures/pull_request.json"}],
       "pr_merge_conflicts" =>
