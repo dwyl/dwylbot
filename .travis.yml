@@ -7,6 +7,7 @@ env:
   - MIX_ENV=test
 before_script:
   - mix do ecto.create
+  - mix do ecto.migrate
 script:
   - mix do deps.get, compile --warnings-as-errors, coveralls.json
 after_success:
