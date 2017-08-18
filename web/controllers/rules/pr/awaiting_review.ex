@@ -20,6 +20,9 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
     reviewers = payload["pull_request"]["requested_reviewers"]
     |> Enum.map(&(&1["login"]))
 
+    assignees = get_assignees_login(payload["issue"]["assignees"])
+    allReviewersWereAssigned? = Enum.all?(reviewers, fn(x) -> Enum.member?(assignees, x) end)
+
     in_progress = payload["issue"]["labels"]
     |> Helpers.label_member?("in-progress")
 
@@ -36,7 +39,7 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
             url: "#{payload["issue"]["url"]}/assignees"
           },
           %{
-            comment: error_message(payload["issue"]["user"]["login"]),
+            comment: error_message(payload["issue"]["user"]["login"], allReviewersWereAssigned?),
             url: payload["issue"]["comments_url"]
           },
         ],
@@ -48,7 +51,13 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
     end
   end
 
-  defp error_message(login) do
+  defp get_assignees_login(assignees) do
+    assignees
+    |> Enum.map(fn(a) -> a["login"] end)
+  end
+
+  defp error_message(login, allReviewersWereAssigned?) do
+    if !allReviewersWereAssigned? do
     """
     @#{login}, hoorah! 🎉  It's review time! 👀
 
@@ -57,9 +66,21 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
 
     To save you time ⏳  I've added the **Reviewer** as an **Assignee** and I've added the `awaiting-review`
     label - automatically - just like magic! 🎩 🐰 ✨. Please correct me if I'm wrong, but if I got it right
-    this time I hope it helps you! 😄 
+    this time I hope it helps you! 😄
 
+    """
+
+  else
+    """
+    @#{login}, hoorah! 🎉  It's review time! 👀
+
+    I couldn't help but notice that there isn't an `in-progress` label on this pull request and a **Reviewer**
+    has been added...makes me think that this pull request is ready for review 🤔
+
+    Please correct me if I'm wrong, but if I got it right
+    this time I hope it helps you! 😄
     """
   end
 
+end
 end
