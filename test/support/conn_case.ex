@@ -36,7 +36,9 @@ defmodule Dwylbot.ConnCase do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Dwylbot.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Dwylbot.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.restart_text_transaction(Dwylbot.Repo,[])
+
+      # Ecto.Adapters.SQL.Sandbox.mode(Dwylbot.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
