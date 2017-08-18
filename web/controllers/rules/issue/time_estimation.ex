@@ -20,10 +20,11 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
 
     labels = payload["issue"]["labels"]
     in_progress = Enum.any?(labels, fn(l) -> l["name"] == "in-progress" end)
+    epic = Enum.any?(labels, fn(l) -> l["name"] == "epic" end)
     estimation = labels
     |> Enum.map(fn(l) -> Regex.match?(~r/T\d{1,3}[mhd]/, l["name"]) end)
     |> Enum.reduce(false, fn(x, acc) -> x || acc end)
-    if in_progress && !estimation do
+    if in_progress && !epic && !estimation do
       %{
         error_type: @rule_name,
         actions: [
