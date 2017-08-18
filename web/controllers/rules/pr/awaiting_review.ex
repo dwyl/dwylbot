@@ -3,6 +3,7 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
   add awaiting-review if a reviewer has been added to the PR
   """
   alias Dwylbot.Rules.Helpers
+  alias Dwylbot.Commits
   @github_api Application.get_env(:dwylbot, :github_api)
   @rule_name "pr_awaiting_review"
 
@@ -23,16 +24,9 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
     in_progress = payload["issue"]["labels"]
     |> Helpers.label_member?("in-progress")
 
-    url = Enum.join(["https://api.travis-ci.org/repos/", payload["pull_request"]["head"]["repo"]["full_name"], "/builds"])
-    headers = ["Authorization": :GITHUB_TRAVIS_ACCESS_TOKEN, "Accept": "application/vnd.travis-ci.2+json", "User-Agent": "MyClient/1.0.0", "Content-Type": "application/json"]
-    {:ok, response} = HTTPoison.get(url, headers)
-
-    prBuild = (Poison.decode!(response.body))["builds"]
-    |> Enum.find(fn(data) ->
-      data["pull_request_number"] == payload["pull_request"]["number"]
-      end)
-
-    if (!Enum.empty?(reviewers) && !in_progress && (prBuild["state"] != "failed")) do
+    commitData  = Dwylbot.Repo.get_by(Commits, sha: payload["pull_request"]["head"]["sha"])
+    # awaiting review label should not be added if tests are failing https://git.io/v7xfe
+    if (!Enum.empty?(reviewers) && !in_progress && (commitData.ci_status != "failure")) do
       %{
         error_type: @rule_name,
         actions: [
@@ -66,7 +60,7 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
 
     To save you time ⏳  I've added the **Reviewer** as an **Assignee** and I've added the `awaiting-review`
     label - automatically - just like magic! 🎩 🐰 ✨. Please correct me if I'm wrong, but if I got it right
-    this time I hope it helps you! 😄 
+    this time I hope it helps you! 😄
 
     """
   end
