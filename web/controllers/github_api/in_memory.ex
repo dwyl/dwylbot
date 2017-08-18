@@ -55,7 +55,8 @@ defmodule Dwylbot.GithubAPI.InMemory do
       "pr_awaiting_review" =>
         [
           {"issue", "./test/fixtures/issue_from_pr.json"},
-          {"pull_request", "./test/fixtures/pr_reviewers-not_inprogress.json"}
+          {"pull_request", "./test/fixtures/pr_reviewers-not_inprogress.json"},
+          {"pull_request", "./test/fixtures/pr_reviewers_not_already_assigned-not_inprogress.json"}
         ],
       "pr_failing_test" =>
         [
