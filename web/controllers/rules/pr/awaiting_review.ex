@@ -26,7 +26,7 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
 
     commitData  = Dwylbot.Repo.get_by(Commits, sha: payload["pull_request"]["head"]["sha"])
     # awaiting review label should not be added if tests are failing https://git.io/v7xfe
-    if (!Enum.empty?(reviewers) && !in_progress && (commitData.ci_status != "failure")) do
+    if (!Enum.empty?(reviewers) && !in_progress && (commitData && commitData.ci_status != "failure")) do
       %{
         error_type: @rule_name,
         actions: [
