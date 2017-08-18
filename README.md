@@ -133,6 +133,17 @@ If you don't already have a GitHub application with valid
 keys you can use to run this project on your localhost,
 please follow these instructions: https://developer.github.com/apps
 
+#### Install ngrok
+
+Install [ngrok](https://ngrok.com). If you have homebrew, you can do this by running `brew install ngrok`
+
+Then in your terminal enter `ngrok http 4000` to generate an SSH between your localhost:4000 and ngrok.io. Copy the http ngrok URL that appears in your terminal. Paste this URL into the webhook URL input of your GitHub app settings followed by '/event/new'. 
+Update your other GitHub app settings as follows: 
+
+![img_0583](https://user-images.githubusercontent.com/11833296/29462960-f32b2828-8428-11e7-9b9f-a350cd14ffa6.PNG)
+(Replace 'naaz-dwylbot' with your own GitHub app name)
+
+NOTE: you will need to uodate the webhook URL everytime you disconnect/connect to ngrok because a different URL is generated everytime.
 #### Define Local Environment Variables
 
 > If you are new to "Environment Variables", please read:
