@@ -3,6 +3,7 @@ defmodule Dwylbot.EventTestController do
   alias Poison.Parser, as: PP
   alias Plug.Conn
   doctest Dwylbot.Rules.Helpers, import: true
+  doctest Dwylbot.Rules.PR.ReviewerButNoAssignee, import: true
 
   @fixtures [
     %{payload: "add_label", event: "issues" },

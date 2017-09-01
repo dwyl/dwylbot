@@ -49,7 +49,20 @@ defmodule Dwylbot.Rules.PR.ReviewerButNoAssignee do
     """
   end
 
-  defp wrong_assignee(assignees, login) do
+  @doc """
+  iex>wrong_assignee([],"SimonLab")
+  true
+  iex>wrong_assignee([%{"login" => "SimonLab"}], "naazy")
+  false
+  iex>wrong_assignee([%{"login" => "iteles"},%{"login" => "naazy"}], "naazy")
+  false
+  iex>wrong_assignee([%{"login" => "iteles"}],"iteles")
+  true
+  iex>wrong_assignee([%{"login" => "naazy"}, %{"login" => "iteles"}],"iteles")
+  false
+  """
+
+  def wrong_assignee(assignees, login) do
     case length(assignees) do
       0 -> true
       1 ->
