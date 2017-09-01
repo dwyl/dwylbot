@@ -24,7 +24,7 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
     estimation = labels
     |> Enum.map(fn(l) -> Regex.match?(~r/T\d{1,3}[mhd]/, l["name"]) end)
     |> Enum.reduce(false, fn(x, acc) -> x || acc end)
-    if in_progress && !epic && !estimation do
+    if in_progress and not epic and not estimation do
       %{
         error_type: @rule_name,
         actions: [
