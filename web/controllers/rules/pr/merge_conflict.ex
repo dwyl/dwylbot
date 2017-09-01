@@ -33,7 +33,11 @@ defmodule Dwylbot.Rules.PR.MergeConflict do
           url: "#{pr["issue"]["url"]}/assignees"
         },
         %{
-          replace_labels: ["merge-conflicts"],
+          add_labels: ["merge-conflicts"],
+          url: "#{pr["issue"]["url"]}/labels"
+        },
+        %{
+          remove_label: "awaiting-review",
           url: "#{pr["issue"]["url"]}/labels"
         }
     ]
