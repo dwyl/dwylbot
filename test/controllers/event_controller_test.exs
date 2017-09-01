@@ -2,6 +2,7 @@ defmodule Dwylbot.EventTestController do
   use Dwylbot.ConnCase
   alias Poison.Parser, as: PP
   alias Plug.Conn
+  alias Dwylbot.Commits
   doctest Dwylbot.Rules.Helpers, import: true
 
   @fixtures [
@@ -18,6 +19,9 @@ defmodule Dwylbot.EventTestController do
   |> Enum.map(&(%{&1 | payload: "./test/fixtures/#{&1.payload}.json"}))
 
   test "POST /event/new", %{conn: conn} do
+    changeset = Commits.changeset(%Commits{}, %{ci_status: "pending", sha: "cc745d25ee918af0e1ba9fd3260247219e56edcb"})
+    updated = Dwylbot.Repo.insert!(changeset)
+
     for fixture <- @fixtures do
       payload = fixture.payload |> File.read! |> PP.parse!
       conn = conn
