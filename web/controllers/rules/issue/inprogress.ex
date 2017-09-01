@@ -23,6 +23,7 @@ defmodule Dwylbot.Rules.Issue.Inprogress do
     in_progress = Enum.any?(labels, fn(l) -> l["name"] == "in-progress" end)
     if in_progress && Enum.empty?(assignees) do
       %{
+        id: Helpers.get_id(payload),
         error_type: @rule_name,
         actions: [
           %{

@@ -30,6 +30,7 @@ config :dwylbot, Dwylbot.Repo,
   ssl: true
 
 config :dwylbot, :github_api, Dwylbot.GithubAPI.HTTPClient
+config :dwylbot, :time_merge_errors, 5000
 
 # ## SSL Support
 #

@@ -30,4 +30,24 @@ defmodule Dwylbot.Rules.Helpers do
     |> Enum.map(&(&1["name"]))
     |> Enum.member?(label)
   end
+
+  @doc """
+  iex>get_id(%{"repository" => %{"full_name" => "repo"}, "issue" => %{"number" => 42}})
+  "repo/42"
+  """
+  def get_id(payload) when is_map(payload)do
+    if Map.has_key?(payload, "repository") && Map.has_key?(payload, "issue") do
+      "#{payload["repository"]["full_name"]}/#{payload["issue"]["number"]}"
+    else
+      nil
+    end
+  end
+
+  @doc """
+  iex>get_id([1,2,3])
+  nil
+  """
+  def get_id(_payload) do
+    nil
+  end
 end

@@ -26,6 +26,7 @@ defmodule Dwylbot.Rules.Issue.TimeEstimation do
     |> Enum.reduce(false, fn(x, acc) -> x || acc end)
     if in_progress and not epic and not estimation do
       %{
+        id: Helpers.get_id(payload),
         error_type: @rule_name,
         actions: [
           %{

@@ -21,6 +21,7 @@ defmodule Dwylbot.Rules.Issue.NoDescription do
     description = String.trim payload["issue"]["body"]
     if String.length(description) == 0 do
       %{
+        id: Helpers.get_id(payload),
         error_type: @rule_name,
         actions: [
           %{

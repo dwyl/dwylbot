@@ -15,6 +15,7 @@ defmodule Dwylbot.Rules.Status.TravisFailure do
     labels = payload["issue"]["labels"]
     if Helpers.label_member?(labels, "awaiting-review") do
       %{
+        id: Helpers.get_id(payload),
         error_type: @rule_name,
         actions: [
           %{
