@@ -20,7 +20,7 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
     reviewers = payload["pull_request"]["requested_reviewers"]
     |> Enum.map(&(&1["login"]))
 
-    assignees = get_assignees_login(payload["issue"]["assignees"])
+    assignees = get_assignees_login(payload["pull_request"]["assignees"])
     allReviewersWereAssigned? = Enum.all?(reviewers, &Enum.member?(assignees, &1))
 
     in_progress = payload["issue"]["labels"]
