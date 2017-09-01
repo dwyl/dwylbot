@@ -39,7 +39,7 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
             url: "#{payload["issue"]["url"]}/assignees"
           },
           %{
-            comment: error_message(payload["issue"]["user"]["login"], allReviewersWereAssigned?),
+            comment: error_message(payload["pull_request"]["user"]["login"], allReviewersWereAssigned?),
             url: payload["issue"]["comments_url"]
           },
         ],
