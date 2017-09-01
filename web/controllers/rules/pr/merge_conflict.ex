@@ -6,9 +6,18 @@ defmodule Dwylbot.Rules.PR.MergeConflict do
   @github_api Application.get_env(:dwylbot, :github_api)
   @rule_name "pr_merge_conflicts"
 
-  def apply?(payload) do
-    payload["action"] == "closed" && payload["pull_request"]["merged"]
-  end
+  @doc """
+  iex>apply?(%{"action" => "closed", "pull_request" => %{"merged" => false}})
+  false
+  iex>apply?(%{"action" => "labeled", "label" => %{"name" => "awaiting-review"}})
+  true
+  iex>apply?(%{"action" => "unlabeled"})
+  false
+  """
+
+  def apply?(%{"action" => "closed", "pull_request" => %{"merged" => merged}}), do: merged
+  def apply?(%{"action" => "labeled", "label" => %{"name" => "awaiting-review"}}), do: true
+  def apply?(%{"action" => _action}), do: false
 
   def check(payload, _get_data?, token) do
     payload = @github_api.get_pull_requests(token, payload, @rule_name)
