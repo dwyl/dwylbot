@@ -17,7 +17,7 @@ defmodule Dwylbot.Rules.PR.MergeConflict do
 
   def apply?(%{"action" => "closed", "pull_request" => %{"merged" => merged}}), do: merged
   def apply?(%{"action" => "labeled", "label" => %{"name" => "awaiting-review"}}), do: true
-  def apply?(%{"action" => action}), do: false
+  def apply?(%{"action" => _action}), do: false
 
   def check(payload, _get_data?, token) do
     payload = @github_api.get_pull_requests(token, payload, @rule_name)
