@@ -25,8 +25,15 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
     |> Helpers.label_member?("in-progress")
 
     commitData  = Dwylbot.Repo.get_by(Commits, sha: payload["pull_request"]["head"]["sha"])
+    ciSuccessfulOrDoesNotExist =
+      if commitData do
+        commitData.ci_status == nil || commitData.ci_status == "success"
+      else
+        false
+      end
+
     # awaiting review label should not be added if tests are failing https://git.io/v7xfe
-    if (!Enum.empty?(reviewers) && !in_progress && (commitData != nil) && (commitData.ci_status != "failure")) do
+    if (!Enum.empty?(reviewers) && !in_progress && commitData != nil && ciSuccessfulOrDoesNotExist) do
       %{
         error_type: @rule_name,
         actions: [
