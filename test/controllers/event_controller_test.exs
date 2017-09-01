@@ -13,7 +13,7 @@ defmodule Dwylbot.EventTestController do
     %{payload: "pr_merge_conflict", event: "pull_request" },
     %{payload: "pr_no_assignee", event: "pull_request" },
     %{payload: "request_reviewer", event: "pull_request" },
-    %{payload: "request_reviewer_all_reviewers_assigned", event: "pull_request" },
+    %{payload: "pr_request_reviewer_all_reviewers_assigned", event: "pull_request" },
     %{payload: "failing_test", event: "status" },
   ]
   |> Enum.map(&(%{&1 | payload: "./test/fixtures/#{&1.payload}.json"}))
