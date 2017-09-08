@@ -11,30 +11,13 @@ defmodule Dwylbot.Rules.PR.NoIssueReference do
   end
 
   def check(payload, _get_data?, token) do
-    # "https://api.github.com/repos/naazy/dwylbot-test/issues/29"
-    # -> https://github.com/naazy/dwylbot-test/issues/41
-    issue_base_url =
-      payload["pull_request"]["issue_url"]
-        |> String.replace("//api.", "//")
-        |> String.split("/")
-        |> Enum.filter(fn(a)-> a != "repos" end)
-        |> Enum.drop(-1) #removes the issue number 29
-        |> Enum.join("/")
 
-    assignees = get_assignees_login(payload["pull_request"]["assignees"])
+    authorIsAssigned = payload["pull_request"]["assignees"]
+      |> get_assignees_login
+      |> Enum.member?(payload["pull_request"]["base"]["user"]["login"])
 
-    authorIsAssigned = Enum.member?(assignees, payload["pull_request"]["base"]["user"]["login"])
 
-    pr_contains_shorthand_issue_reference? = Regex.match?(~r/(#[0-9]+)\b/, payload["pull_request"]["body"])
-
-    compiled_issue_url_regex = case Regex.compile("(#{issue_base_url}\/[0-9]+)") do
-      {:ok, string} -> string
-      {:error, _reason} -> "error compiling regex"
-    end
-
-    pr_contains_url_issue_reference? = Regex.match?(compiled_issue_url_regex, payload["pull_request"]["body"])
-
-    if (!(pr_contains_shorthand_issue_reference? || pr_contains_url_issue_reference?) && !authorIsAssigned) do
+    if (!pr_contains_issue_reference?(payload["pull_request"]) && !authorIsAssigned) do
       %{
         error_type: @rule_name,
         actions: [
@@ -70,6 +53,46 @@ defmodule Dwylbot.Rules.PR.NoIssueReference do
   defp get_assignees_login(assignees) do
     assignees
     |> Enum.map(fn(a) -> a["login"] end)
+  end
+
+  @doc """
+  iex>get_issue_base_url("https://api.github.com/repos/naazy/dwylbot-test/issues/29")
+  "https://github.com/naazy/dwylbot-test/issues"
+  """
+  defp get_issue_base_url(api_issue_url) do
+    api_issue_url
+      |> String.replace("//api.", "//")
+      |> String.split("/")
+      |> Enum.filter(fn(a)-> a != "repos" end)
+      |> Enum.drop(-1) #removes the issue number 29
+      |> Enum.join("/")
+  end
+
+  @doc """
+  iex>pr_contains_issue_reference(%{"body": "my comment #41")
+  true
+  iex>pr_contains_issue_reference(%{"body": "no issue ref")
+  false
+  iex>pr_contains_issue_reference(%{"body": "https://github.com/naazy/dwylbot-test/issues/29")
+  true
+  """
+  defp pr_contains_issue_reference?(pr_data) do
+    # shorthand means with # e.g. #41
+    pr_contains_shorthand_issue_reference? = Regex.match?(~r/(#[0-9]+)\b/, pr_data["body"])
+    || Regex.match?(~r/(#[0-9]+)\b/, pr_data["title"])
+
+    issue_base_url =
+      get_issue_base_url pr_data["issue_url"]
+
+    compiled_issue_url_regex = case Regex.compile("(#{issue_base_url}\/[0-9]+)") do
+      {:ok, string} -> string
+      {:error, _reason} -> "error compiling regex"
+    end
+
+    pr_contains_url_issue_reference? = Regex.match?(compiled_issue_url_regex, pr_data["body"])
+      || Regex.match?(compiled_issue_url_regex, pr_data["title"])
+
+    pr_contains_shorthand_issue_reference? || pr_contains_url_issue_reference?
   end
 
   defp error_message(login) do
