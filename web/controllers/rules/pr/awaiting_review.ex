@@ -33,7 +33,7 @@ defmodule Dwylbot.Rules.PR.AwaitingReview do
       end
 
     # awaiting review label should not be added if tests are failing https://git.io/v7xfe
-    if (!Enum.empty?(reviewers) && !in_progress && commitData != nil && ciSuccessfulOrDoesNotExist) do
+    if (!Enum.empty?(reviewers) and !in_progress and commitData != nil and ciSuccessfulOrDoesNotExist) do
       %{
         error_type: @rule_name,
         actions: [
