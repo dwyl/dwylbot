@@ -12,8 +12,8 @@ defmodule Dwylbot.Rules.Status.TravisFailure do
     ci_status = payload["state"]
     sha = payload["commit"]["sha"]
     changeset = Commits.changeset(%Commits{}, %{ci_status: ci_status, sha: sha})
-    updated = Repo.insert!(changeset)
-
+    on_conflict = [set: [ci_status: payload["state"]]]
+    {:ok, updated} = Repo.insert(changeset, on_conflict: on_conflict, conflict_target: :sha)
     payload["state"] == "failure"
   end
 
