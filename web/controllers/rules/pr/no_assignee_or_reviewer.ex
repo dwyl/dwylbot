@@ -1,13 +1,14 @@
-defmodule Dwylbot.Rules.PR.NoAssignee do
+defmodule Dwylbot.Rules.PR.NoAssigneeOrReviewer do
   @moduledoc """
   Check for error when an PR has awaiting-review but no assignees
   """
   alias Dwylbot.Rules.Helpers
   @github_api Application.get_env(:dwylbot, :github_api)
-  @rule_name "pr_no_assignee"
+  @rule_name "pr_no_assignee_or_reviewer"
 
   def apply?(payload) do
-    payload["action"] in ~w(labeled unassigned assigned)
+    reviewers = payload["pull_request"]["requested_reviewers"]  |> Enum.map(&(&1["login"]))
+    payload["action"] in ~w(labeled unassigned assigned) && Enum.empty?(reviewers)
   end
 
   def check(payload, _get_data?, token) do
@@ -37,7 +38,7 @@ defmodule Dwylbot.Rules.PR.NoAssignee do
 
   defp error_message(login) do
     """
-    :warning: @#{login}, the pull request is in "awaiting-review" but doesn't have a correct assignee.
+    :warning: @#{login}, the pull request is in "awaiting-review" but doesn't have a reviewer or a correct assignee.
     Please assign someone to review the pull request, thanks.
     """
   end
