@@ -135,7 +135,7 @@ please follow these instructions: https://developer.github.com/apps
 
 #### Install ngrok
 
-Install [ngrok](https://ngrok.com). If you have homebrew, you can do this by running `brew install ngrok`
+Install [ngrok](https://ngrok.com). If you have homebrew, you can do this by running `brew cask install ngrok`
 
 Then in your terminal enter `ngrok http 4000` to generate an SSH between your localhost:4000 and ngrok.io. Copy the http ngrok URL that appears in your terminal. Paste this URL into the webhook URL input of your GitHub app settings followed by '/event/new'. 
 Update your other GitHub app settings as follows: 
