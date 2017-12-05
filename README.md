@@ -137,8 +137,8 @@ please follow these instructions: https://developer.github.com/apps
 
 Install [ngrok](https://ngrok.com). If you have homebrew, you can do this by running `brew cask install ngrok`
 
-Then in your terminal enter `ngrok http 4000` to generate an SSH between your localhost:4000 and ngrok.io. Copy the http ngrok URL that appears in your terminal. Paste this URL into the webhook URL input of your GitHub app settings followed by '/event/new'. 
-Update your other GitHub app settings as follows: 
+Then in your terminal enter `ngrok http 4000` to generate an SSH between your localhost:4000 and ngrok.io. Copy the http ngrok URL that appears in your terminal. Paste this URL into the webhook URL input of your GitHub app settings followed by '/event/new'.
+Update your other GitHub app settings as follows:
 
 ![img_0583](https://user-images.githubusercontent.com/11833296/29462960-f32b2828-8428-11e7-9b9f-a350cd14ffa6.PNG)
 (Replace 'naaz-dwylbot' with your own GitHub app name)
@@ -226,6 +226,44 @@ Need an example GitHub Webhook request payload for this...
 see: https://github.com/dwyl/dwylbot/issues/6#issuecomment-286387463
 
 See: https://developer.github.com/webhooks/creating/
+
+#### Creating a New Rule
+When creating a rule, follow this template:
+
+The rule {name_of_the_rule} is triggered by the event: {github_event}.
+If {condition_1} [AND | OR] {condition_2} [AND | OR] ... based on the data extracted from the
+[ISSUE | PR]
+Then apply the following actions on the [ISSUE | PR] :
+
+- {action_1}
+- {action_2}
+- ...
+
+**Notes:**
+- {name_of_the_rule} is just a string representing the rule, it can be whatever we want
+- A {github_event} can be (I didn't write the events for PR but they are very similar
+  - issue created
+  - One label added to an issue
+  - One label removed from an issue
+  - user assigned to an issue
+  - user unassigned to an issue
+  - comment added to an issue
+  - issue closed
+- Only one {github_event} can trigger a rule, ie we can't combine multiple event to trigger the rule. So we can't have for example issue created AND/OR label in-progress added
+- The {condition} are some properties that we check on the issue or PR. For example, we can check that the list of labesl is not empty on the issue, that there is a user assigned to an issue, that the description of the issue contain some specific keyword...
+- We can combine the {conditions} with a AND or a OR operator
+- The {action} are applied to the issue or PR. We need to describe them with precise details, for example:
+  - add a comment to the issue with the following text: "..."
+  - add the label "in-progress" to the issue
+  - add the user "..." to the issue
+  - ...
+
+**A simple and complete example:**
+The **in_progress_no_assignee** rule is triggered by the event:
+**the `in-progress` label is added to the issue**
+If **the assignee selector is empty**
+**Then** add a comment to the issue saying:
+"Warning! This issue has an `in progress` label, but doesn't have an **Assignee**"
 
 
 ## tl;dr
