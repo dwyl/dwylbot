@@ -22,20 +22,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# Configer Ueberauth providers
-config :ueberauth, Ueberauth,
-  base_path: "/auth",
-  providers: [
-    github: {
-      Ueberauth.Strategy.Github,
-      [request_path: "/auth/github", callback_path: "/auth/github/callback"]
-    }
-  ]
-
-config :ueberauth, Ueberauth.Strategy.Github.OAuth,
-  client_id: System.get_env("GITHUB_CLIENT_ID"),
-  client_secret: System.get_env("GITHUB_CLIENT_SECRET")
-
 # define name of the github application
 config :dwylbot, :github_app_name, System.get_env("GITHUB_APP_NAME")
 
