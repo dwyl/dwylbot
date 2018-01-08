@@ -6,10 +6,13 @@
 [![codecov](https://codecov.io/gh/dwyl/dwylbot/branch/master/graph/badge.svg)](https://codecov.io/gh/dwyl/dwylbot)
 [![Discuss](https://img.shields.io/badge/discuss-with%20us-brightgreen.svg?style=flat)](https://github.com/dwyl/dwylbot/issues "Discuss your ideas/suggestions with us!")
 
+**We are currently updating the documentation and the Readme of this project. All the open PRs will be reviewed soon. However if you have any questions or want to contribute to `dwylobt` don't hesitate to open a new issue!**
+
 _**Automating** our **GitHub workflow** to `.reduce` the number of **clicks**
 the **people** need to **perform** <br />
 to get their work `done` and **help everyone communicate better**
 with team members_. <br />
+
 
 ## _Prerequisite to Understanding `dwylbot`_
 
@@ -204,7 +207,7 @@ The `dwylbot` server will receive events from Github, filter and identify this e
   # SECRET_KEY_BASE is required for Auth Cookie:
   export SECRET_KEY_BASE=MustBeA64ByteStringProbablyBestToGenerateUsingCryptoOrJustUseThisWithSomeRandomDigitsOnTheEnd1234567890
   ```
-  You can found the value of ```GITHUB_APP_ID``` and ```GITHUB_APP_NAME``` on the `About` and `Basic information` sections. 
+  You can found the value of ```GITHUB_APP_ID``` and ```GITHUB_APP_NAME``` on the `About` and `Basic information` sections.
   The private key is the key generated when you've crated the Gitub app.
   You can generate a new secrete key base with ```mix phoenix.gen.secret```.
 
