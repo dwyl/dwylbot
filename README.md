@@ -113,95 +113,155 @@ to start understanding the project, but it helps to know the basics._
 
 ### Run The Project _Locally_!
 
+You might want to run your own instance of `dwylbot` on your machine
+to see how it can help you with your workflow.
+You might also like to help us and add new rules to `dwylbot` (check our contribution guide: https://github.com/dwyl/contributing)!
 The "_production_" version of `dwylbot` runs on Heroku,
-but we _develop_ it locally and you can _easily_ run it on your computer.
+but we _develop_ it locally and you can _easily_ run it on your computer
+and tinker the code as much as you'd like.
+
+You will need to:
+
+- Create a new Github application.
+- Run a `dwylbot` server on your machine.
 
 > _**Note**: **only** `try` to run this on your computer once
 you've understood Elixir & Phoenix._
 
-#### Clone the Repository
+#### Create a GitHub application
 
-Clone the GitHub repo _to your personal computer_:
+The role of the Github application is to send notifications
+when events occur on your repositories.
+For example you can get a notification when new issues or pull requests are open.
+In our case the Github application keep up to date `dwylbot` with any events happening on your repositories.
 
-```
-git clone git@github.com:dwyl/dwylbot.git && cd dwylbot
-```
+- Access the [new application settings page](https://github.com/settings/apps/new) on your Github account:
+  Settings -> Developer settings -> Github Apps -> New Github App
 
-#### Create a GitHub Application
+  ![new Github app](https://user-images.githubusercontent.com/6057298/34667319-75439af0-f460-11e7-8ae5-a9f52944b364.png)
 
-If you don't already have a GitHub application with valid
-keys you can use to run this project on your localhost,
-please follow these instructions: https://developer.github.com/apps
 
-#### Install ngrok
+- Github App name: The name of the app; "dwylbot"
+- Descriptions: A short description of the app; "My dwylbot app"
+- Homepage URL: The website of the app: "https://dwyl.com/"
+- User authorization callback URL: Redirect the user to this url for authentication each time the application is installed; "http://localhost:4000/auth/github/callback"
+- Setup URL: Redirect the user to this url after installation, not needed for `dwylbot`
+- Webhook URL: URL where post requests from Github are sent to. The endpoint is ```/event/new```, however Github won't be able to send requests to ```http://localhost:4000/event/new``` as this url is only accessible by your own machine. To expose publicly your `localhost` server you can use `ngrok`. **Remember to update this value after you have a running dwylbot server on your machine!**
 
-Install [ngrok](https://ngrok.com). If you have homebrew, you can do this by running `brew cask install ngrok`
+    Install [ngrok](https://ngrok.com). If you have homebrew, you can do this by running `brew cask install ngrok`
 
-Then in your terminal enter `ngrok http 4000` to generate an SSH between your localhost:4000 and ngrok.io. Copy the http ngrok URL that appears in your terminal. Paste this URL into the webhook URL input of your GitHub app settings followed by '/event/new'. 
-Update your other GitHub app settings as follows: 
+    Then in your terminal enter `ngrok http 4000` to generate an SSH between your localhost:4000 and ngrok.io. Copy the ngrok url that appears in your terminal to the Github app configuration; "http://bf541ce5.ngrok.io/event/new"
 
-![img_0583](https://user-images.githubusercontent.com/11833296/29462960-f32b2828-8428-11e7-9b9f-a350cd14ffa6.PNG)
-(Replace 'naaz-dwylbot' with your own GitHub app name)
+    > _NOTE: you will need to update the webhook URL everytime you disconnect/connect to ngrok because a different URL is generated everytime._
 
-NOTE: you will need to uodate the webhook URL everytime you disconnect/connect to ngrok because a different URL is generated everytime.
-#### Define Local Environment Variables
+    You can read more about webhooks and ngrock at https://developer.github.com/webhooks/configuring/
+- Define the access rights for the application on the permmission section. **Change "issues" and "pull requests" to "Read & Write"**
+  ![Github App permissions](https://user-images.githubusercontent.com/6057298/34676734-beddd8b8-f485-11e7-8b5d-e899faa95ae6.png)
 
-> If you are new to "Environment Variables", please read:
-[github.com/dwyl/**learn-environment-variables**](https://github.com/dwyl/learn-environment-variables)
+- Select which events ```dwylbot``` will be notified on. **Check "issues", "issue comment" and "pull request"**
+  ![Github App events](https://user-images.githubusercontent.com/6057298/34676896-48ab5ade-f486-11e7-89e9-5ebe921de802.png)
 
-To run the application on your localhost (_personal computer_)
-create an `.env` file where you can define your environment variables.
+  >_Check the list of rules already implemented by dwylbot to see which permissions and notifications you want to select._
 
-`dwylbot/.env`:
-```
-export GITHUB_CLIENT_ID=FollowTheInstructionsToCreateAnAppOnGitHub
-export GITHUB_CLIENT_SECRET=*******
-export DATABASE_URL=****
-# SECRET_KEY_BASE is required for Auth Cookie:
-export SECRET_KEY_BASE=MustBeA64ByteStringProbablyBestToGenerateUsingCryptoOrJustUseThisWithSomeRandomDigitsOnTheEnd1234567890
-```
-Then execute the command ```source .env``` which will create your environment variables
+- Webhook secret: This token can be used to make sure that the requests received by `dwylbot` are from Github; `dwylbot` doesn't use this token at the moment so you can keep this field empty (see https://developer.github.com/webhooks/securing/)
 
-> _**Note**: This method only adds the environment variables **locally**
-and **temporarily** <br />
-so you need to start your server in the **same terminal**
-where you ran the `source` command_.
+- You can decide to allow other users to install the Github Application or to limit the app on your account only:
+  ![Github app install scope](https://user-images.githubusercontent.com/6057298/34677046-cf874e96-f486-11e7-9f60-912f3ec2809b.png)
 
-#### Install Dependencies
+  You can now click on "Create Github App"!
 
-```
-mix deps.get && npm install
-```
+- Create a private key: This key is used to identify specific `dwylbot` installations
 
-#### Confirm Everything is working
+  ![Github App private key](https://user-images.githubusercontent.com/6057298/34678365-d9d73dd0-f48a-11e7-8d1b-cfbfa11bbcc9.png)
 
-Run the tests:
+  The downloaded file contains the private key.
+  Copy this key in your environment variables, see the next section.
 
-```
-mix test
-```
 
-#### Creat the Database (_if it does not already exist_)
+You can also read the Github guide on how to create a new Github App at https://developer.github.com/apps/building-github-apps/creating-a-github-app/
 
-```
-mix ecto.create && mix ecto.migrate
-```
+#### Run a `dwylbot` server
 
-#### Run the Server
+The `dwylbot` server will receive events from Github, filter and identify this events and when necessary send actions to Github (comment on issues, change labels on issues, ...)
 
-```
-mix phoenix.server
-```
-You should see:
-```
-[info] Running Dwylbot.Endpoint with Cowboy using http://localhost:4000
-```
+- Clone the repository _to your personal computer_:
+  ```
+  git clone git@github.com:dwyl/dwylbot.git && cd dwylbot
+  ```
+- Define the local environment variables:
 
-#### View the Project in your Web Browser
+  > If you are new to "Environment Variables", please read:
+  [github.com/dwyl/**learn-environment-variables**](https://github.com/dwyl/learn-environment-variables)
+
+  To run the application on your localhost (_personal computer_)
+  create an `.env` file where you can define your environment variables.
+
+  `dwylbot/.env`:
+  ```
+  export GITHUB_CLIENT_ID=1111111111
+  export GITHUB_CLIENT_SECRET=*******
+  export GITHUB_APP_ID=1111
+  export GITHUB_APP_NAME=myGithubApp
+  export PRIVATE_APP_KEY="-----BEGIN RSA PRIVATE KEY-----private key generated by Github when the Github app is created"
+  # SECRET_KEY_BASE is required for Auth Cookie:
+  export SECRET_KEY_BASE=MustBeA64ByteStringProbablyBestToGenerateUsingCryptoOrJustUseThisWithSomeRandomDigitsOnTheEnd1234567890
+  ```
+  You can found the value of ```GITHUB_CLIENT_ID``` and ```GITHUB_CLIENT_SECRET``` in the `OAuth credentials` section of the configuation page of the Github App. ```GITHUB_APP_ID``` and ```GITHUB_APP_NAME``` are on the `About` and `Basic information` sections. The private key is the key generated when you've crated the Gitub app.
+
+  You can generate a new secrete key base with ```mix phoenix.gen.secret```.
+
+  Then execute the command ```source .env``` which will create your environment variables
+
+  > _**Note**: This method only adds the environment variables **locally**
+  and **temporarily** <br />
+  so you need to start your server in the **same terminal**
+  where you ran the `source` command_.
+
+- Install dependencies:
+
+  ```
+  mix deps.get && npm install
+  ```
+
+- Confirm everything is working by running the tests:
+
+  ```
+  mix test
+  ```
+
+- Create the Database (_if it does not already exist_)
+
+  ```
+  mix ecto.create && mix ecto.migrate
+  ```
+
+- Run the Server
+
+  ```
+  mix phoenix.server
+  ```
+  You should see:
+  ```
+  [info] Running Dwylbot.Endpoint with Cowboy using http://localhost:4000
+  ```
+
+- Now that your server is running you can update the `webhook url` in your app config:
+  - run ```ngrok http 4000``` in a new terminal
+
+    ![ngrok](https://user-images.githubusercontent.com/6057298/34685179-73b6d71c-f49f-11e7-8dab-abfc64c9e938.png)
+  - copy and save the url into your Github App config with ```/event/new``` for endpoint
+
+- View the Project in your Web Browser
 
 Open http://localhost:4000 in your web browser.
 
-![dwylbot welcome](https://cloud.githubusercontent.com/assets/194400/23944236/04ae41b4-096a-11e7-986d-8bb0063fd95a.png)
+![dwylbot welcome](https://user-images.githubusercontent.com/6057298/34680750-c8f33710-f491-11e7-993d-28d664473cbc.png)
+
+From the welcome page you can now manage the installations of and select the repositories where you want `dwylbot` active on.
+
+If you have manage to install successfully your new Github App on one of your repositories,
+you can quickly test your dwylbot server by creating for example a new issue without a description.
+A new `dwylbot` comment on the issue should warn you to add a description!
 
 Ok, so you know the Phoenix server is working.
 That's nice, but what does it actually _do_...?
@@ -215,10 +275,6 @@ when you want to _understand_ <br />a Phoenix project is:
 [`web/router.ex`](https://github.com/dwyl/dwylbot/blob/master/web/router.ex)
 
 In this case we only have one (_interesting_) route: `/event/new`
-
-
-#### Tests!
-
 
 ### Make a `cURL` Request to the `POST /event/new`
 
