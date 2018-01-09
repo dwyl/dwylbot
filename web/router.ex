@@ -21,6 +21,7 @@ defmodule Dwylbot.Router do
 
   scope "/event", Dwylbot do
     pipe_through :api
+
     post "/new", EventController, :new
   end
 
