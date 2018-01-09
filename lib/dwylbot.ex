@@ -11,7 +11,7 @@ defmodule Dwylbot do
       # Start the Ecto repository
       supervisor(Dwylbot.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(Dwylbot.Endpoint, []),
+      supervisor(DwylbotWeb.Endpoint, []),
       # Start your own worker by calling: Dwylbot.Worker.start_link(arg1, arg2, arg3)
       # worker(Dwylbot.Worker, [arg1, arg2, arg3]),
     ]
@@ -25,7 +25,7 @@ defmodule Dwylbot do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    Dwylbot.Endpoint.config_change(changed, removed)
+    DwylbotWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

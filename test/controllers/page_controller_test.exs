@@ -1,5 +1,5 @@
-defmodule Dwylbot.PageControllerTest do
-  use Dwylbot.ConnCase
+defmodule DwylbotWeb.PageControllerTest do
+  use DwylbotWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

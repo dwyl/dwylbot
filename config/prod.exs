@@ -15,7 +15,7 @@ config :dwylbot, Dwylbot.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "dwylbot.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  cache_static_manifest: "priv/static/manifest.json",
+  cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   debug_errors: true
 
@@ -29,7 +29,7 @@ config :dwylbot, Dwylbot.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
-config :dwylbot, :github_api, Dwylbot.GithubAPI.HTTPClient
+config :dwylbot, :github_api, DwylbotWeb.GithubAPI.HTTPClient
 
 # ## SSL Support
 #

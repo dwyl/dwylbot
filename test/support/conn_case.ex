@@ -1,4 +1,4 @@
-defmodule Dwylbot.ConnCase do
+defmodule DwylbotWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -25,10 +25,10 @@ defmodule Dwylbot.ConnCase do
       import Ecto.Changeset
       import Ecto.Query
 
-      import Dwylbot.Router.Helpers
+      import DwylbotWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Dwylbot.Endpoint
+      @endpoint DwylbotWeb.Endpoint
     end
   end
 

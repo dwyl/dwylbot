@@ -18,4 +18,4 @@ config :dwylbot, Dwylbot.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :dwylbot, :github_api, Dwylbot.GithubAPI.InMemory
+config :dwylbot, :github_api, DwylbotWeb.GithubAPI.InMemory
