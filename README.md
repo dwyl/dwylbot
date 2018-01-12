@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/dwyl/dwylbot/branch/master/graph/badge.svg)](https://codecov.io/gh/dwyl/dwylbot)
 [![Discuss](https://img.shields.io/badge/discuss-with%20us-brightgreen.svg?style=flat)](https://github.com/dwyl/dwylbot/issues "Discuss your ideas/suggestions with us!")
 
-**We are currently updating the documentation and the Readme of this project. All the open PRs will be reviewed soon. However if you have any questions or want to contribute to `dwylobt` don't hesitate to open a new issue!**
+**We are currently updating the documentation and the Readme of this project. All the open PRs will be reviewed soon. However if you have any questions or want to contribute to `dwylbot` don't hesitate to open a new issue!**
 
 _**Automating** our **GitHub workflow** to `.reduce` the number of **clicks**
 the **people** need to **perform** <br />
@@ -144,7 +144,7 @@ In our case the Github application keep up to date `dwylbot` with any events hap
   ![new Github app](https://user-images.githubusercontent.com/6057298/34667319-75439af0-f460-11e7-8ae5-a9f52944b364.png)
 
 
-- Github App name: The name of the app; "dwylbot"
+- Github App name: The name of the app; must be unique, so can't be "dwylbot" as that's taken!
 - Descriptions: A short description of the app; "My dwylbot app"
 - Homepage URL: The website of the app: "https://dwyl.com/"
 - User authorization callback URL: Redirect the user to this url for authentication each time the application is installed; "http://localhost:4000/auth/github/callback"
@@ -157,7 +157,7 @@ In our case the Github application keep up to date `dwylbot` with any events hap
 
     > _NOTE: you will need to update the webhook URL everytime you disconnect/connect to ngrok because a different URL is generated everytime._
 
-    You can read more about webhooks and ngrock at https://developer.github.com/webhooks/configuring/
+    You can read more about webhooks and ngrok at https://developer.github.com/webhooks/configuring/
 - Define the access rights for the application on the permmission section. **Change "issues" and "pull requests" to "Read & Write"**
   ![Github App permissions](https://user-images.githubusercontent.com/6057298/34676734-beddd8b8-f485-11e7-8b5d-e899faa95ae6.png)
 
