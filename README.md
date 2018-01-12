@@ -128,6 +128,8 @@ You will need to:
 - Create a new Github application.
 - Run a `dwylbot` server on your machine.
 
+You'll need to have installed [Elixir](https://elixir-lang.org/install.html), [Phoenix](https://hexdocs.pm/phoenix/installation.html), and [ngrok](https://ngrok.com/download) if you haven't already.
+
 > _**Note**: **only** `try` to run this on your computer once
 you've understood Elixir & Phoenix._
 
