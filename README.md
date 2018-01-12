@@ -209,7 +209,7 @@ The `dwylbot` server will receive events from Github, filter and identify this e
   # SECRET_KEY_BASE is required for Auth Cookie:
   export SECRET_KEY_BASE=MustBeA64ByteStringProbablyBestToGenerateUsingCryptoOrJustUseThisWithSomeRandomDigitsOnTheEnd1234567890
   ```
-  You can found the value of ```GITHUB_APP_ID``` and ```GITHUB_APP_NAME``` on the `About` and `Basic information` sections.
+  You can find the value of ```GITHUB_APP_ID``` and ```GITHUB_APP_NAME``` in the `About` and `Basic information` sections.
   The private key is the key generated when you've crated the Gitub app.
   You can generate a new secrete key base with ```mix phoenix.gen.secret```.
 
@@ -262,7 +262,7 @@ Open http://localhost:4000 in your web browser.
 
 From the welcome page you can now manage the installations of and select the repositories where you want `dwylbot` active on.
 
-If you have manage to install successfully your new Github App on one of your repositories,
+If you have managed to install successfully your new Github App on one of your repositories,
 you can quickly test your dwylbot server by creating for example a new issue without a description.
 A new `dwylbot` comment on the issue should warn you to add a description!
 
