@@ -1,4 +1,4 @@
-defmodule Dwylbot.ChannelCase do
+defmodule DwylbotWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -27,7 +27,7 @@ defmodule Dwylbot.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint Dwylbot.Endpoint
+      @endpoint DwylbotWeb.Endpoint
     end
   end
 

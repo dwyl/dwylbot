@@ -1,3 +1,3 @@
-defmodule Dwylbot.LayoutViewTest do
-  use Dwylbot.ConnCase, async: true
+defmodule DwylbotWeb.LayoutViewTest do
+  use DwylbotWeb.ConnCase, async: true
 end

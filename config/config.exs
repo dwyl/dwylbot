@@ -10,10 +10,10 @@ config :dwylbot,
   ecto_repos: [Dwylbot.Repo]
 
 # Configures the endpoint
-config :dwylbot, Dwylbot.Endpoint,
+config :dwylbot, DwylbotWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
-  render_errors: [view: Dwylbot.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: DwylbotWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Dwylbot.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
