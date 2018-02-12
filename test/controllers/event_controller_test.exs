@@ -14,6 +14,7 @@ defmodule Dwylbot.EventTestController do
     %{payload: "pr_merge_conflict", event: "pull_request" },
     %{payload: "pr_no_assignee_or_reviewer", event: "pull_request" },
     %{payload: "request_reviewer", event: "pull_request" },
+    %{payload: "pr_request_reviewer_all_reviewers_assigned", event: "pull_request" },
     %{payload: "failing_test", event: "status" },
     %{payload: "pr_reviewer_but_no_assignee", event: "pull_request"}
   ]
