@@ -149,7 +149,7 @@ In our case the Github application keep up to date `dwylbot` with any events hap
 - Github App name: The name of the app; must be unique, so can't be "dwylbot" as that's taken!
 - Descriptions: A short description of the app; "My dwylbot app"
 - Homepage URL: The website of the app: "https://dwyl.com/"
-- User authorization callback URL: Redirect the user to this url for authentication each time the application is installed; "http://localhost:4000/auth/github/callback"
+- User authorization callback URL: Redirect url after user authentication e.g."http://localhost:4000/auth/github/callback". This is not needed for dwylbot so this field can be left empty.
 - Setup URL: Redirect the user to this url after installation, not needed for `dwylbot`
 - Webhook URL: URL where post requests from Github are sent to. The endpoint is ```/event/new```, however Github won't be able to send requests to ```http://localhost:4000/event/new``` as this url is only accessible by your own machine. To expose publicly your `localhost` server you can use `ngrok`. **Remember to update this value after you have a running dwylbot server on your machine!**
 

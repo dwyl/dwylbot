@@ -36,7 +36,6 @@ defmodule Dwylbot.Web do
 
       import Dwylbot.Router.Helpers
       import Dwylbot.Gettext
-      import Dwylbot.Auth, only: [authenticate_user: 2]
     end
   end
 
