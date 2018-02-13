@@ -269,6 +269,18 @@ A new `dwylbot` comment on the issue should warn you to add a description!
 Ok, so you know the Phoenix server is working.
 That's nice, but what does it actually _do_...?
 
+#### Deploy on Heroku
+
+dwylbot is automatically deploy on Heroku each time a pull request is merged on master.
+If you update the version of Erlang, Elixir or Phoenix on the project,
+you might also need to update the buildpack on Heroku:
+![update buildpack](https://user-images.githubusercontent.com/6057298/36139754-b220a98e-1096-11e8-86dd-366f9eacac27.png)
+
+The ```elixir_buildpack.config``` config file allow you to update the versions of Erlang and Elixir.
+You can find more information about Heroku deploy here:
+- https://hexdocs.pm/phoenix/heroku.html
+- https://github.com/HashNuke/heroku-buildpack-elixir
+
 ### _Understanding_ The Project
 
 #### Routing
