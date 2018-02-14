@@ -23,11 +23,11 @@ config :dwylbot, Dwylbot.Endpoint,
 # config :logger, level: :info
 config :logger, :console, format: "[$level] $message\n"
 # Configure your database
-config :dwylbot, Dwylbot.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl: true
+# config :dwylbot, Dwylbot.Repo,
+#   adapter: Ecto.Adapters.Postgres,
+#   url: System.get_env("DATABASE_URL"),
+#   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+#   ssl: true
 
 config :dwylbot, :github_api, DwylbotWeb.GithubAPI.HTTPClient
 
