@@ -15,25 +15,9 @@ defmodule DwylbotWeb do
   Do NOT define functions inside the quoted expressions
   below.
   """
-
-  def model do
-    quote do
-      use Ecto.Schema
-
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
-    end
-  end
-
   def controller do
     quote do
       use Phoenix.Controller, namespace: DwylbotWeb
-
-      alias Dwylbot.Repo
-      import Ecto
-      import Ecto.Query
-
       import DwylbotWeb.Router.Helpers
       import DwylbotWeb.Gettext
     end
@@ -69,10 +53,6 @@ defmodule DwylbotWeb do
   def channel do
     quote do
       use Phoenix.Channel
-
-      alias Dwylbot.Repo
-      import Ecto
-      import Ecto.Query
       import DwylbotWeb.Gettext
     end
   end

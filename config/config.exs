@@ -6,8 +6,6 @@
 use Mix.Config
 
 # General application configuration
-config :dwylbot,
-  ecto_repos: [Dwylbot.Repo]
 
 # Configures the endpoint
 config :dwylbot, DwylbotWeb.Endpoint,
