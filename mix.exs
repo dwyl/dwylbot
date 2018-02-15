@@ -19,7 +19,7 @@ defmodule Dwylbot.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Dwylbot, []},
+    [mod: {Dwylbot.Application, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :httpoison, :joken, :jose]]
   end
